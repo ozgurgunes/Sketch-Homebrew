@@ -1,0 +1,23 @@
+{
+  "compatibleVersion": 3,
+  "bundleVersion": 1,
+  "icon": "icon.png",
+  "commands": [
+    {
+      "name": "Space Horizontally",
+      "identifier": "homebrew.space-horizontally-identifier",
+      "script": "./space-horizontally.js"
+    },
+    {
+      "name": "Space Vertically",
+      "identifier": "homebrew.space-vertically-identifier",
+      "script": "./space-vertically.js"
+    }
+  ],
+  "menu": {
+    "title": "Homebrew",
+    "items": [
+      "homebrew.space-vertically-identifier"
+    ]
+  }
+}
