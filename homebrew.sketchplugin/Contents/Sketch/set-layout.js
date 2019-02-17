@@ -1,5 +1,243 @@
-var that=this;function __skpm_run(e,t){that.context=t;var r=function(e){var t={};function r(n){if(t[n])return t[n].exports;var i=t[n]={i:n,l:!1,exports:{}};return e[n].call(i.exports,i,i.exports,r),i.l=!0,i.exports}return r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var i in e)r.d(n,i,function(t){return e[t]}.bind(null,i));return n},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s="./src/set-layout.js")}({"./src/set-layout.js":
+var that = this;
+function __skpm_run (key, context) {
+  that.context = context;
+
+var exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/set-layout.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/set-layout.js":
 /*!***************************!*\
   !*** ./src/set-layout.js ***!
   \***************************/
-/*! exports provided: default */function(e,t,r){"use strict";r.r(t);var n=NSApplication.sharedApplication,i=["Default","Sidebar","Banner","Combo"],a={menuWidth:256,bannerWidth:304,marginWidth:24,guttersOutside:!1},o={large:1120,desktop:936,tablet:700,mobile:288},u={large:12,desktop:12,tablet:12,mobile:12},d={large:32,desktop:24,tablet:20,mobile:12};t.default=function(e){var t=e.document.currentPage().currentArtboard(),r=function(e,t,r,i){if(r.length<1)return n.displayDialog("No type defined");i=i||0;var a=NSPopUpButton.alloc().initWithFrame(NSMakeRect(0,0,240,25));a.addItemsWithTitles(r),a.selectItemAtIndex(i);var o=function(e,t,r,n){n=n||["OK","Cancel"];var i=NSAlert.alloc().init();i.setMessageText(e),i.setInformativeText(t),n.forEach(function(e){i.addButtonWithTitle(e)}),r&&i.setAccessoryView(r);return i.runModal()}(e,t,a),u=a.titleOfSelectedItem;if(1e3===o)return u}("Grid Type","Please select a grid type.",i);if(r()){var l;switch(!0){case t.frame().width()>=1280:l="large";break;case t.frame().width()>=1024&&t.frame().width()<1280:l="desktop";break;case t.frame().width()>=768&&t.frame().width()<1024:l="tablet";break;case t.frame().width()<=480:l="mobile"}var s=function(e,t,r){var n=MSLayoutGrid.alloc().init(),i=e.horizontalRulerData();n.setGutterWidth(d[t]),n.setNumberOfColumns(u[t]),n.setGuttersOutside(a.guttersOutside);var l=(e.frame().width()-o[t])/2,s=o[t];(function e(t){t.numberOfGuides()&&(t.removeGuideAtIndex(0),e(t))})(i),("Sidebar"==r()||"Combo"==r())&&(i.addGuideWithValue(l),i.addGuideWithValue(l+a.menuWidth),l+=a.menuWidth+a.marginWidth,s-=a.menuWidth+a.marginWidth);"Banner"!=r()&&"Combo"!=r()||(s-=a.bannerWidth+a.marginWidth,i.addGuideWithValue(l+s+a.marginWidth),i.addGuideWithValue(l+s+a.marginWidth+a.bannerWidth));var f=(s-(u[t]-1)*d[t])/u[t];return n.setTotalWidth(s),n.setHorizontalOffset(l),n.setColumnWidth(f),n}(t,l,r);t.setLayout(s)}}}});"default"===e&&"function"==typeof r?r(t):r[e](t)}that.onRun=__skpm_run.bind(this,"default");
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var app = NSApplication.sharedApplication; //const layout = MSLayoutGrid.alloc().init()
+
+var types = ['Default', 'Sidebar', 'Banner', 'Combo'];
+var defaults = {
+  'menuWidth': 256,
+  'bannerWidth': 304,
+  'marginWidth': 24,
+  'guttersOutside': false
+};
+var screens = {
+  'large': 1120,
+  'desktop': 936,
+  'tablet': 700,
+  'mobile': 288
+};
+var columns = {
+  'large': 12,
+  'desktop': 12,
+  'tablet': 12,
+  'mobile': 12
+};
+var gutter = {
+  'large': 32,
+  'desktop': 24,
+  'tablet': 20,
+  'mobile': 12 // Handler function for "makeGrid"
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (function (context) {
+  var doc = context.document;
+  var artboard = doc.currentPage().currentArtboard();
+  var layoutType = createSelect("Grid Type", "Please select a grid type.", types);
+
+  if (layoutType) {
+    var screenType;
+
+    switch (true) {
+      case artboard.frame().width() >= 1280:
+        screenType = 'large';
+        break;
+
+      case artboard.frame().width() >= 1024 && artboard.frame().width() < 1280:
+        screenType = 'desktop';
+        break;
+
+      case artboard.frame().width() >= 768 && artboard.frame().width() < 1024:
+        screenType = 'tablet';
+        break;
+
+      case artboard.frame().width() <= 480:
+        screenType = 'mobile';
+        break;
+    }
+
+    var layout = calculateLayout(artboard, screenType, layoutType);
+    artboard.setLayout(layout);
+  }
+});
+
+function calculateLayout(artboard, screenType, layoutType) {
+  var layout = MSLayoutGrid.alloc().init();
+  var ruler = artboard.horizontalRulerData();
+  layout.setGutterWidth(gutter[screenType]);
+  layout.setNumberOfColumns(columns[screenType]);
+  layout.setGuttersOutside(defaults['guttersOutside']);
+  var offset = (artboard.frame().width() - screens[screenType]) / 2;
+  var totalWidth = screens[screenType];
+  clearGuides(ruler);
+
+  if (layoutType == 'Sidebar' || layoutType == 'Combo') {
+    ruler.addGuideWithValue(offset);
+    ruler.addGuideWithValue(offset + defaults['menuWidth']);
+    offset += defaults['menuWidth'] + defaults['marginWidth'];
+    totalWidth -= defaults['menuWidth'] + defaults['marginWidth'];
+  }
+
+  if (layoutType == 'Banner' || layoutType == 'Combo') {
+    totalWidth -= defaults['bannerWidth'] + defaults['marginWidth'];
+    ruler.addGuideWithValue(offset + totalWidth + defaults['marginWidth']);
+    ruler.addGuideWithValue(offset + totalWidth + defaults['marginWidth'] + defaults['bannerWidth']);
+  }
+
+  var columnWidth = (totalWidth - (columns[screenType] - 1) * gutter[screenType]) / columns[screenType];
+  layout.setTotalWidth(totalWidth);
+  layout.setHorizontalOffset(offset);
+  layout.setColumnWidth(columnWidth);
+  return layout;
+}
+
+function clearGuides(ruler) {
+  if (ruler.numberOfGuides()) {
+    ruler.removeGuideAtIndex(0);
+    clearGuides(ruler);
+  }
+}
+
+function createDialog(message, info, accessory, buttons) {
+  buttons = buttons || ['OK', 'Cancel'];
+  var alert = NSAlert.alloc().init();
+  alert.setMessageText(message);
+  alert.setInformativeText(info);
+  buttons.forEach(function (data) {
+    alert.addButtonWithTitle(data);
+  });
+
+  if (accessory) {
+    alert.setAccessoryView(accessory); //alert.window.setInitialFirstResponder(accessory);
+  }
+
+  return alert.runModal();
+}
+
+function createSelect(msg, info, items, selectedItemIndex) {
+  if (items.length < 1) {
+    return app.displayDialog("No type defined");
+  }
+
+  selectedItemIndex = selectedItemIndex || 0;
+  var accessory = NSPopUpButton.alloc().initWithFrame(NSMakeRect(0, 0, 240, 25));
+  accessory.addItemsWithTitles(items);
+  accessory.selectItemAtIndex(selectedItemIndex);
+  var response = createDialog(msg, info, accessory);
+  var result = accessory.titleOfSelectedItem();
+
+  if (response === 1000) {
+    return result;
+  }
+}
+
+/***/ })
+
+/******/ });
+  if (key === 'default' && typeof exports === 'function') {
+    exports(context);
+  } else {
+    exports[key](context);
+  }
+}
+that['onRun'] = __skpm_run.bind(this, 'default')
+
+//# sourceMappingURL=set-layout.js.map

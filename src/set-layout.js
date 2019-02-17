@@ -35,7 +35,7 @@ export default function(context) {
 	let artboard = doc.currentPage().currentArtboard()
 	let layoutType = createSelect("Grid Type", "Please select a grid type.", types);
 
-	if (layoutType()) {
+	if (layoutType) {
 		let screenType;
 		switch (true) {
 		case (artboard.frame().width() >= 1280):
@@ -71,13 +71,13 @@ function calculateLayout(artboard, screenType, layoutType) {
 
 	clearGuides(ruler);
 
-	if (layoutType() == 'Sidebar' || layoutType() == 'Combo') {
+	if (layoutType == 'Sidebar' || layoutType == 'Combo') {
 		ruler.addGuideWithValue(offset);
 		ruler.addGuideWithValue(offset + defaults['menuWidth']);
 		offset += defaults['menuWidth'] + defaults['marginWidth'];
 		totalWidth -= defaults['menuWidth'] + defaults['marginWidth'];
 	}
-	if (layoutType() == 'Banner' || layoutType() == 'Combo') {
+	if (layoutType == 'Banner' || layoutType == 'Combo') {
 		totalWidth -= defaults['bannerWidth'] + defaults['marginWidth'];
 		ruler.addGuideWithValue(offset + totalWidth + defaults['marginWidth']);
 		ruler.addGuideWithValue(offset + totalWidth + defaults['marginWidth'] + defaults['bannerWidth']);
@@ -124,7 +124,7 @@ function createSelect(msg, info, items, selectedItemIndex) {
 	accessory.selectItemAtIndex(selectedItemIndex);
 
 	var response = createDialog(msg, info, accessory);
-	var result = accessory.titleOfSelectedItem;
+	var result = accessory.titleOfSelectedItem();
 	if (response === 1000) {
 		return result;
 	}
