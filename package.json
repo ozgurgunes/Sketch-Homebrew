@@ -1,7 +1,7 @@
 {
   "name": "homebrew",
   "description": "A collection of utilities.",
-  "version": "0.1.1-1",
+  "version": "0.1.1-2",
   "engines": {
     "sketch": ">=3.0"
   },
