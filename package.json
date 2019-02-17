@@ -1,7 +1,7 @@
 {
   "name": "homebrew",
   "description": "A collection of utilities.",
-  "version": "0.1.0",
+  "version": "0.1.1-0",
   "engines": {
     "sketch": ">=3.0"
   },
@@ -23,8 +23,8 @@
     "@skpm/builder": "^0.5.11"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/ozgurgunes/Sketch-Homebrew.git"
+    "type": "git",
+    "url": "https://github.com/ozgurgunes/Sketch-Homebrew.git"
   },
   "author": "Ozgur Gunes <o.gunes@gmail.com>"
 }
