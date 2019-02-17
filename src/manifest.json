@@ -4,6 +4,18 @@
   "icon": "icon.png",
   "commands": [
     {
+      "name": "Set Layout",
+      "identifier": "homebrew.set-layout-identifier",
+      "shortcut" : "cmd ctrl l",
+      "script": "./set-layout.js"
+    },
+    {
+      "name": "Select Unused Symbols",
+      "identifier": "homebrew.select-unused-symbols-identifier",
+      "shortcut" : "cmd ctrl u",
+      "script": "./select-unused-symbols.js"
+    },
+    {
       "name": "Space Horizontally",
       "identifier": "homebrew.space-horizontally-identifier",
       "shortcut" : "cmd ctrl h",
@@ -31,6 +43,8 @@
   "menu": {
     "title": "Homebrew",
     "items": [
+      "homebrew.set-layout-identifier",
+      "homebrew.select-unused-symbols-identifier",
       "homebrew.space-vertically-identifier",
       "homebrew.space-horizontally-identifier",
       "homebrew.zoom-info-identifier",
