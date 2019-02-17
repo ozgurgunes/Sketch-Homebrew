@@ -6,18 +6,35 @@
     {
       "name": "Space Horizontally",
       "identifier": "homebrew.space-horizontally-identifier",
+      "shortcut" : "cmd ctrl h",
       "script": "./space-horizontally.js"
     },
     {
       "name": "Space Vertically",
       "identifier": "homebrew.space-vertically-identifier",
+      "shortcut" : "cmd ctrl v",
       "script": "./space-vertically.js"
+    },
+    {
+      "name": "Zoom Info",
+      "identifier": "homebrew.zoom-info-identifier",
+      "shortcut" : "cmd alt z",
+      "script": "./zoom-info.js"
+    },
+    {
+      "name": "Zoom Tool",
+      "identifier": "homebrew.zoom-tool-identifier",
+      "shortcut" : "cmd ctrl z",
+      "script": "./zoom-tool.js"
     }
   ],
   "menu": {
     "title": "Homebrew",
     "items": [
-      "homebrew.space-vertically-identifier"
+      "homebrew.space-vertically-identifier",
+      "homebrew.space-horizontally-identifier",
+      "homebrew.zoom-info-identifier",
+      "homebrew.zoom-tool-identifier"
     ]
   }
 }

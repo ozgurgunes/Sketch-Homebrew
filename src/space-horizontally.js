@@ -10,17 +10,16 @@ export default function() {
     sketch.UI.message("Space Horizontally: Please select at least 2 layers.")
   } 
   else {
-    sketch.UI.getInputFromUser("Horizontal Spacing", 
+    sketch.UI.getInputFromUser("Horizontal Spacing (px):", 
       {
         initialValue: 0,
-        description: "Object distance (px):"
       },
       (err, value) => {
         if (err) {
           // most likely the user canceled the input
           return
         }
-        else if (!Number(value)) {
+        else if (!Number.isInteger(Number(value))) {
           // accept integer only
           sketch.UI.message("Please enter numbers only.")
         }
@@ -52,7 +51,7 @@ function setSpacing(selection, value){
   elements.forEach(layer => {
     left = count > 0 ? left : layer.frame.x
     layer.frame.x = left
-    left += layer.frame.height + Number(value);
+    left += layer.frame.width + Number(value);
     count++
   })
 
