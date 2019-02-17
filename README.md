@@ -4,7 +4,7 @@ A collection of utilities.
 
 ## Install
 
-Download, unzip and double click on the .sketchplugin file.
+[Download](https://github.com/ozgurgunes/Sketch-Homebrew/releases/latest) the latest release, unzip and double click on the .sketchplugin file.
 
 ## Contribute
 

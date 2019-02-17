@@ -1,8 +1,21 @@
 {
+  "identifier": "com.gunesozgur.homebrew",
   "compatibleVersion": 3,
   "bundleVersion": 1,
   "icon": "icon.png",
   "commands": [
+    {
+      "name": "Reload Plugins",
+      "identifier": "homebrew.reload-plugins-identifier",
+      "shortcut": "cmd ctrl r",
+      "script": "reload-plugins.js"
+    },
+    {
+      "name": "Reset Image Aspect Ratio",
+      "identifier": "homebrew.reset-image-aspect-ratio-identifier",
+      "shortcut": "cmd ctrl i",
+      "script": "reset-image-aspect-ratio.js"
+    },
     {
       "name": "Set Layout",
       "identifier": "homebrew.set-layout-identifier",
@@ -43,6 +56,8 @@
   "menu": {
     "title": "Homebrew",
     "items": [
+      "homebrew.reload-plugins-identifier",
+      "homebrew.reset-image-aspect-ratio-identifier",
       "homebrew.set-layout-identifier",
       "homebrew.select-unused-symbols-identifier",
       "homebrew.space-vertically-identifier",
@@ -51,10 +66,9 @@
       "homebrew.zoom-tool-identifier"
     ]
   },
-  "version": "0.1.1-5",
+  "version": "0.1.1-7",
   "description": "A collection of utilities.",
   "name": "Homebrew",
-  "identifier": "Homebrew",
   "disableCocoaScriptPreprocessor": true,
   "appcast": "https://raw.githubusercontent.com/ozgurgunes/Sketch-Homebrew/master/.appcast.xml",
   "author": "Ozgur Gunes",
