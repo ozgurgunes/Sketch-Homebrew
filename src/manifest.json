@@ -7,13 +7,11 @@
     {
       "name": "Reload Plugins",
       "identifier": "homebrew.reload-plugins-identifier",
-      "shortcut" : "cmd ctrl r",
       "script": "./reload-plugins.js"
     },
     {
       "name": "Reset Image Aspect Ratio",
       "identifier": "homebrew.reset-image-aspect-ratio-identifier",
-      "shortcut" : "cmd ctrl i",
       "script": "./reset-image-aspect-ratio.js"
     },
     {
@@ -25,7 +23,6 @@
     {
       "name": "Select Unused Symbols",
       "identifier": "homebrew.select-unused-symbols-identifier",
-      "shortcut" : "cmd ctrl u",
       "script": "./select-unused-symbols.js"
     },
     {
