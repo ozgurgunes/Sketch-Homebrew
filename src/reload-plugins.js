@@ -1,5 +1,9 @@
-export default function() {
+import UI from 'sketch/ui'
+import analytics from './analytics.js'
 
+const scriptName = "Reload Plugins"
+
+export default function(context) {
   let paneController = MSPreferencesController.sharedController();
   let pane = paneController.currentPreferencePane();
   if (!pane) {
@@ -7,6 +11,6 @@ export default function() {
   }
   let pluginManager = pane.pluginManager();
   pluginManager.reloadPlugins();
-  context.document.showMessage("Plugins reloaded!");
-
+  analytics(context, scriptName)
+  UI.message(scriptName + ": Done!")
 }

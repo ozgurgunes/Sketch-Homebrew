@@ -1,3 +1,8 @@
+import sketch from 'sketch/dom'
+import UI from 'sketch/ui'
+import analytics from './analytics.js'
+
+const scriptName = "Set Layout"
 const app = NSApplication.sharedApplication
 
 //const layout = MSLayoutGrid.alloc().init()
@@ -54,6 +59,10 @@ export default function(context) {
 
 		let layout = calculateLayout(artboard, screenType, layoutType);
 		artboard.setLayout(layout);
+  
+  var message = layoutType + " - " + screens
+  analytics(context, scriptName, message)
+  UI.message(scriptName + ": " + message)
     
 	}
 }

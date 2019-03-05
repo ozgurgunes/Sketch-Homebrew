@@ -1,12 +1,15 @@
-import sketch from 'sketch'
-// documentation: https://developer.sketchapp.com/reference/api/
+import sketch from 'sketch/dom'
+import UI from 'sketch/ui'
+import analytics from './analytics.js'
+
+const scriptName = "Zoom Tool"
 
 const doc = sketch.getSelectedDocument()
 const zoomValue = Math.round(100 * doc.sketchObject.zoomValue())/100
 
 export default function() {
 
-  sketch.UI.getInputFromUser("Zoom (%):", 
+  UI.getInputFromUser("Zoom (%):", 
     {initialValue: zoomValue*100,},
     (err, value) => {
       if (err) {
@@ -15,11 +18,15 @@ export default function() {
       }
       else if (!Number.isInteger(Number(value))) {
         // accept integer only
-        sketch.UI.message("Please enter numbers only.")
+        var message = "Please enter numbers only."
+        analytics(context, scriptName, message)
+        UI.message("Zoom: " + message)  
       }
       else {
         setZoom(value)
-        sketch.UI.message("Zoom: " + value + "%")
+        var message = value + "%"
+        analytics(context, scriptName, message)
+        UI.message("Zoom: " + message)  
       }
     }
   )

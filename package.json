@@ -1,7 +1,14 @@
 {
-  "name": "Homebrew",
+  "name": "homebrew",
   "description": "A collection of utilities.",
+  "homepage": "https://github.com/ozgurgunes/Sketch-Homebrew",
+  "author": "Ozgur Gunes <o.gunes@gmail.com>",
+  "license": "UNLICENSED",
   "version": "0.2.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ozgurgunes/Sketch-Homebrew.git"
+  },
   "engines": {
     "sketch": ">=3.0"
   },
@@ -22,9 +29,7 @@
   "devDependencies": {
     "@skpm/builder": "^0.5.11"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ozgurgunes/Sketch-Homebrew.git"
-  },
-  "author": "Ozgur Gunes <o.gunes@gmail.com>"
+  "dependencies": {
+    "sketch-module-google-analytics": "^0.1.4"
+  }
 }

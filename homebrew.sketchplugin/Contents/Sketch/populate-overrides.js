@@ -86,7 +86,7 @@ var exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/space-vertically.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/populate-overrides.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -193,10 +193,10 @@ var PLUGIN_NAME = "Homebrew",
 
 /***/ }),
 
-/***/ "./src/space-vertically.js":
-/*!*********************************!*\
-  !*** ./src/space-vertically.js ***!
-  \*********************************/
+/***/ "./src/populate-overrides.js":
+/*!***********************************!*\
+  !*** ./src/populate-overrides.js ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -210,57 +210,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var scriptName = "Space Vertically";
+var scriptName = "Populate Overrides";
+var doc = sketch_dom__WEBPACK_IMPORTED_MODULE_0___default.a.getSelectedDocument(),
+    selection = doc.selectedLayers;
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
-  var doc = sketch_dom__WEBPACK_IMPORTED_MODULE_0___default.a.getSelectedDocument();
-  var selection = doc.selectedLayers;
-  var message;
+  var message = "Done!";
 
-  if (selection.length <= 1) {
-    message = "Please select at least 2 layers.";
+  if (selection.length != 1 || selection.layers[0].type != sketch_dom__WEBPACK_IMPORTED_MODULE_0___default.a.Types.SymbolInstance) {
+    message = "Please select a symbol instance.";
     Object(_analytics_js__WEBPACK_IMPORTED_MODULE_2__["default"])(context, scriptName, message);
     sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ": " + message);
   } else {
-    sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.getInputFromUser("Vertical Spacing (px):", {
-      initialValue: 0
-    }, function (err, value) {
-      if (err) {
-        // most likely the user canceled the input
-        return;
-      } else if (!Number.isInteger(Number(value))) {
-        // accept integer only
-        message = "Please enter numbers only.";
-        Object(_analytics_js__WEBPACK_IMPORTED_MODULE_2__["default"])(context, scriptName, message);
-        sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ": " + message);
-      } else {
-        setSpacing(selection, value);
-        message = value + " px";
-        Object(_analytics_js__WEBPACK_IMPORTED_MODULE_2__["default"])(context, scriptName, message);
-        sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ": " + message);
+    var symbol = selection.layers[0];
+    symbol.overrides.map(function (override) {
+      if (override.property == 'stringValue') {
+        symbol.setOverrideValue(override, override.value);
       }
     });
+    Object(_analytics_js__WEBPACK_IMPORTED_MODULE_2__["default"])(context, scriptName, message);
+    sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ": " + message);
   }
 });
-
-function setSpacing(selection, value) {
-  var elements = [];
-  var top = 0;
-  var count = 0; // convert selection to standard array
-
-  selection.forEach(function (layer) {
-    elements.push(layer);
-  }); // sort layers by vertical positions
-
-  elements.sort(function (a, b) {
-    return a.frame.y - b.frame.y;
-  });
-  elements.forEach(function (layer) {
-    top = count > 0 ? top : layer.frame.y;
-    layer.frame.y = top;
-    top += layer.frame.height + Number(value);
-    count++;
-  });
-}
 
 /***/ }),
 
@@ -295,4 +265,4 @@ module.exports = require("sketch/ui");
 }
 that['onRun'] = __skpm_run.bind(this, 'default')
 
-//# sourceMappingURL=space-vertically.js.map
+//# sourceMappingURL=populate-overrides.js.map

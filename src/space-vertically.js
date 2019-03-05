@@ -1,16 +1,22 @@
-import sketch from 'sketch'
-// documentation: https://developer.sketchapp.com/reference/api/
+import sketch from 'sketch/dom'
+import UI from 'sketch/ui'
+import analytics from './analytics.js'
 
-export default function() {
+const scriptName = "Space Vertically"
+
+export default function(context) {
   
   const doc = sketch.getSelectedDocument()
   const selection = doc.selectedLayers;
+  var message
 
   if (selection.length <= 1) {
-    sketch.UI.message("Space Vertically: Please select at least 2 layers.")
+    message = "Please select at least 2 layers."
+    analytics(context, scriptName, message)
+    UI.message(scriptName + ": " + message)
   } 
   else {
-    sketch.UI.getInputFromUser("Vertical Spacing (px):", 
+    UI.getInputFromUser("Vertical Spacing (px):", 
       {
         initialValue: 0,
       },
@@ -21,11 +27,15 @@ export default function() {
         }
         else if (!Number.isInteger(Number(value))) {
           // accept integer only
-          sketch.UI.message("Please enter numbers only.")
+          message = "Please enter numbers only."
+          analytics(context, scriptName, message)
+          UI.message(scriptName + ": " + message)    
         }
         else {
           setSpacing(selection, value)
-          sketch.UI.message("Vertical Spacing: " + value + " px")
+          message = value + " px"
+          analytics(context, scriptName, message)
+          UI.message(scriptName + ": " + message)    
         }
       }
     )

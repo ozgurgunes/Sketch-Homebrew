@@ -1,51 +1,66 @@
 {
-  "identifier": "com.gunesozgur.homebrew",
+  "name": "Homebrew",
+  "description": "A collection of utilities.",
+  "identifier": "com.gunesozgur.sketch.homebrew",
+  "homepage": "https://github.com/ozgurgunes/Sketch-Homebrew",
+  "author": "Ozgur Gunes <o.gunes@gmail.com>",
+  "appcast": "https://raw.githubusercontent.com/ozgurgunes/Sketch-Homebrew/master/.appcast.xml",
   "compatibleVersion": 3,
   "bundleVersion": 1,
   "icon": "icon.png",
   "commands": [
     {
+      "name": "Development Logger",
+      "identifier": "homebrew.dev",
+      "script": "./dev.js"
+    },
+    {
+      "name": "Populate Overrides",
+      "identifier": "homebrew.populate-overrides",
+      "script": "./populate-overrides.js"
+    },
+    {
       "name": "Reload Plugins",
-      "identifier": "homebrew.reload-plugins-identifier",
+      "identifier": "homebrew.reload-plugins",
       "script": "./reload-plugins.js"
     },
     {
       "name": "Reset Image Aspect Ratio",
-      "identifier": "homebrew.reset-image-aspect-ratio-identifier",
+      "identifier": "homebrew.reset-image-aspect-ratio",
       "script": "./reset-image-aspect-ratio.js"
     },
     {
       "name": "Set Layout",
-      "identifier": "homebrew.set-layout-identifier",
+      "identifier": "homebrew.set-layout",
       "shortcut" : "cmd ctrl l",
       "script": "./set-layout.js"
     },
     {
       "name": "Select Unused Symbols",
-      "identifier": "homebrew.select-unused-symbols-identifier",
+      "identifier": "homebrew.select-unused-symbols",
       "script": "./select-unused-symbols.js"
     },
     {
       "name": "Space Horizontally",
-      "identifier": "homebrew.space-horizontally-identifier",
+      "identifier": "homebrew.space-horizontally",
       "shortcut" : "cmd ctrl h",
       "script": "./space-horizontally.js"
     },
     {
       "name": "Space Vertically",
-      "identifier": "homebrew.space-vertically-identifier",
+      "identifier": "homebrew.space-vertically",
       "shortcut" : "cmd ctrl v",
       "script": "./space-vertically.js"
     },
     {
       "name": "Zoom Info",
-      "identifier": "homebrew.zoom-info-identifier",
+      "identifier": "homebrew.zoom-info",
       "shortcut" : "cmd alt z",
       "script": "./zoom-info.js"
     },
     {
       "name": "Zoom Tool",
-      "identifier": "homebrew.zoom-tool-identifier",
+      "identifier": "homebrew.zoom-tool",
       "shortcut" : "cmd ctrl z",
       "script": "./zoom-tool.js"
     }
@@ -53,14 +68,15 @@
   "menu": {
     "title": "Homebrew",
     "items": [
-      "homebrew.reload-plugins-identifier",
-      "homebrew.reset-image-aspect-ratio-identifier",
-      "homebrew.set-layout-identifier",
-      "homebrew.select-unused-symbols-identifier",
-      "homebrew.space-vertically-identifier",
-      "homebrew.space-horizontally-identifier",
-      "homebrew.zoom-info-identifier",
-      "homebrew.zoom-tool-identifier"
+      "homebrew.populate-overrides",
+      "homebrew.reload-plugins",
+      "homebrew.reset-image-aspect-ratio",
+      "homebrew.set-layout",
+      "homebrew.select-unused-symbols",
+      "homebrew.space-vertically",
+      "homebrew.space-horizontally",
+      "homebrew.zoom-info",
+      "homebrew.zoom-tool"
     ]
   }
 }
