@@ -151,16 +151,12 @@ module.exports = function (context, trackingId, hitType, props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch-module-google-analytics */ "./node_modules/sketch-module-google-analytics/index.js");
 /* harmony import */ var sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _defaults_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaults.js */ "./src/defaults.js");
 
-
-/* harmony default export */ __webpack_exports__["default"] = (function (context, action, label, value) {
+/* harmony default export */ __webpack_exports__["default"] = (function (label, value) {
+  var ID = 'UA-5738625-2';
   var payload = {};
-  payload.ec = _defaults_js__WEBPACK_IMPORTED_MODULE_1__["PLUGIN_NAME"];
-
-  if (action) {
-    payload.ea = action;
-  }
+  payload.ec = context.plugin.name();
+  payload.ea = context.command.name();
 
   if (label) {
     payload.el = label;
@@ -170,26 +166,8 @@ __webpack_require__.r(__webpack_exports__);
     payload.ev = value;
   }
 
-  return sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0___default()(context, _defaults_js__WEBPACK_IMPORTED_MODULE_1__["GA_TRACKING_ID"], 'event', payload);
+  return sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0___default()(context, ID, 'event', payload);
 });
-
-/***/ }),
-
-/***/ "./src/defaults.js":
-/*!*************************!*\
-  !*** ./src/defaults.js ***!
-  \*************************/
-/*! exports provided: PLUGIN_NAME, PLUGIN_KEY, GA_TRACKING_ID */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLUGIN_NAME", function() { return PLUGIN_NAME; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLUGIN_KEY", function() { return PLUGIN_KEY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GA_TRACKING_ID", function() { return GA_TRACKING_ID; });
-var PLUGIN_NAME = "Homebrew",
-    PLUGIN_KEY = "com.gunesozgur.sketch.homebrew",
-    GA_TRACKING_ID = "UA-5738625-2";
 
 /***/ }),
 
@@ -204,33 +182,168 @@ var PLUGIN_NAME = "Homebrew",
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sketch_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch/dom */ "sketch/dom");
 /* harmony import */ var sketch_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_dom__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var sketch_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sketch/ui */ "sketch/ui");
-/* harmony import */ var sketch_ui__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sketch_ui__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _analytics_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./analytics.js */ "./src/analytics.js");
+/* harmony import */ var _analytics_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./analytics.js */ "./src/analytics.js");
+/* harmony import */ var _ui_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui.js */ "./src/ui.js");
 
 
 
-var scriptName = "Populate Overrides";
-var doc = sketch_dom__WEBPACK_IMPORTED_MODULE_0___default.a.getSelectedDocument(),
-    selection = doc.selectedLayers;
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
-  var message = "Done!";
-
-  if (selection.length != 1 || selection.layers[0].type != sketch_dom__WEBPACK_IMPORTED_MODULE_0___default.a.Types.SymbolInstance) {
-    message = "Please select a symbol instance.";
-    Object(_analytics_js__WEBPACK_IMPORTED_MODULE_2__["default"])(context, scriptName, message);
-    sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ": " + message);
-  } else {
-    var symbol = selection.layers[0];
-    symbol.overrides.map(function (override) {
-      if (override.property == 'stringValue') {
-        symbol.setOverrideValue(override, override.value);
-      }
+  try {
+    var doc = sketch_dom__WEBPACK_IMPORTED_MODULE_0___default.a.getSelectedDocument();
+    var symbols = doc.selectedLayers.layers.filter(function (layer) {
+      return layer.type == sketch_dom__WEBPACK_IMPORTED_MODULE_0___default.a.Types.SymbolInstance;
     });
-    Object(_analytics_js__WEBPACK_IMPORTED_MODULE_2__["default"])(context, scriptName, message);
-    sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ": " + message);
+
+    if (symbols.length < 1) {
+      Object(_analytics_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Selection Error');
+      throw _ui_js__WEBPACK_IMPORTED_MODULE_2__["error"]('Please select symbols!');
+    }
+
+    var c = 0;
+    symbols.map(function (symbol) {
+      symbol.overrides.filter(function (override) {
+        return override.property == 'stringValue';
+      }).map(function (override) {
+        symbol.setOverrideValue(override, override.value);
+        c++;
+      });
+    });
+    Object(_analytics_js__WEBPACK_IMPORTED_MODULE_1__["default"])('Done', c);
+    _ui_js__WEBPACK_IMPORTED_MODULE_2__["success"](c + ' overrides in ' + symbols.length + ' symbols populated.');
+  } catch (e) {
+    console.log(e);
+    return e;
   }
 });
+
+/***/ }),
+
+/***/ "./src/ui.js":
+/*!*******************!*\
+  !*** ./src/ui.js ***!
+  \*******************/
+/*! exports provided: message, error, success, dialog, comboBox, popUpButton, scrollView, optionList, errorList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "message", function() { return message; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "error", function() { return error; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "success", function() { return success; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dialog", function() { return dialog; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "comboBox", function() { return comboBox; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "popUpButton", function() { return popUpButton; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "scrollView", function() { return scrollView; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "optionList", function() { return optionList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorList", function() { return errorList; });
+/* harmony import */ var sketch_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch/ui */ "sketch/ui");
+/* harmony import */ var sketch_ui__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_ui__WEBPACK_IMPORTED_MODULE_0__);
+
+var message = function message(msg, status) {
+  var emoji = '';
+
+  switch (status) {
+    case 'error':
+      emoji = '⚠️   ';
+      break;
+
+    case 'success':
+      emoji = '✅   ';
+      break;
+  }
+
+  sketch_ui__WEBPACK_IMPORTED_MODULE_0___default.a.message(emoji + context.command.name() + ': ' + msg);
+};
+var error = function error(msg) {
+  return message(msg, 'error');
+};
+var success = function success(msg) {
+  return message(msg, 'success');
+};
+var dialog = function dialog(info, accessory, buttons, message) {
+  buttons = buttons || ['OK'];
+  message = message || context.command.name();
+  var alert = NSAlert.alloc().init();
+  alert.setMessageText(message);
+  alert.setInformativeText(info);
+  buttons.map(function (button) {
+    return alert.addButtonWithTitle(button);
+  });
+
+  if (context.plugin.alertIcon()) {
+    alert.icon = context.plugin.alertIcon();
+  }
+
+  if (accessory) {
+    alert.setAccessoryView(accessory);
+
+    if (!accessory.isMemberOfClass(NSTextView)) {
+      alert.window().setInitialFirstResponder(accessory);
+    }
+  }
+
+  return alert.runModal();
+};
+var comboBox = function comboBox(items) {
+  var accessory = NSComboBox.alloc().initWithFrame(NSMakeRect(0, 0, 240, 25));
+  accessory.addItemsWithObjectValues(items);
+  accessory.setEditable(true);
+  accessory.setCompletes(true);
+  return accessory;
+};
+var popUpButton = function popUpButton(items) {
+  var accessory = NSPopUpButton.alloc().initWithFrame(NSMakeRect(0, 0, 240, 25));
+  accessory.addItemsWithTitles(items);
+  return accessory;
+};
+var scrollView = function scrollView(view) {
+  var accessory = NSView.alloc().initWithFrame(NSMakeRect(0, 0, 300, 120));
+  var scrollView = NSScrollView.alloc().initWithFrame(NSMakeRect(0, 0, 300, 120));
+  scrollView.setHasVerticalScroller(true);
+  scrollView.setHasHorizontalScroller(false);
+  scrollView.setDocumentView(view);
+  accessory.addSubview(scrollView);
+  return accessory;
+};
+var optionList = function optionList(items) {
+  var listView = NSView.alloc().initWithFrame(NSMakeRect(0, 0, 300, items.length * 24 + 10));
+  var options = [];
+  items.map(function (item, i) {
+    options[i] = NSButton.alloc().initWithFrame(NSMakeRect(5, 5 + i * 24, 290, 20));
+    options[i].setButtonType(NSSwitchButton);
+    options[i].setTitle(item);
+    options[i].setState(false);
+    listView.addSubview(options[i]);
+    listView.setFlipped(true);
+  });
+  return {
+    options: options,
+    view: listView,
+    getSelection: function getSelection() {
+      var selection = [];
+      options.map(function (option, i) {
+        if (option.state()) {
+          selection.push(i);
+        }
+      });
+      return selection;
+    }
+  };
+};
+var errorList = function errorList(items) {
+  var listView = NSView.alloc().initWithFrame(NSMakeRect(0, 0, 300, items.length * 24 + 10));
+  var font = NSFont.systemFontOfSize(NSFont.smallSystemFontSize());
+  var errors = [];
+  items.map(function (item, i) {
+    errors[i] = NSTextView.alloc().initWithFrame(NSMakeRect(5, 10 + i * 24, 290, 20));
+    errors[i].insertText(item);
+    errors[i].setFont(font);
+    errors[i].setEditable(false);
+    listView.addSubview(errors[i]);
+  });
+  listView.setFlipped(true);
+  return listView;
+};
 
 /***/ }),
 

@@ -1,10 +1,11 @@
 {
   "name": "Homebrew",
-  "description": "A collection of utilities.",
+  "description": "A collection of Sketch utilities.",
   "identifier": "com.gunesozgur.sketch.homebrew",
   "homepage": "https://github.com/ozgurgunes/Sketch-Homebrew",
-  "author": "Ozgur Gunes <o.gunes@gmail.com>",
   "appcast": "https://raw.githubusercontent.com/ozgurgunes/Sketch-Homebrew/master/.appcast.xml",
+  "author": "Özgür Güneş",
+  "authorEmail": "o.gunes@gmail.com",
   "compatibleVersion": 3,
   "bundleVersion": 1,
   "icon": "icon.png",
@@ -66,19 +67,22 @@
     }
   ],
   "menu": {
-    "title": "Homebrew",
+    "title": "_Homebrew",
     "items": [
       "homebrew.populate-overrides",
       "homebrew.reload-plugins",
-      "homebrew.reset-image-aspect-ratio",
-      "homebrew.set-layout",
       "homebrew.select-unused-symbols",
+      "homebrew.reset-image-aspect-ratio",
+      "-",
+      "homebrew.set-layout",
+      "-",
       "homebrew.space-vertically",
       "homebrew.space-horizontally",
+      "-",
       "homebrew.zoom-info",
       "homebrew.zoom-tool"
     ]
   },
-  "version": "0.2.1",
+  "version": "0.3.0",
   "disableCocoaScriptPreprocessor": true
 }

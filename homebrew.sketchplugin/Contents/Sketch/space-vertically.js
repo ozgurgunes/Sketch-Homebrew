@@ -151,16 +151,12 @@ module.exports = function (context, trackingId, hitType, props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch-module-google-analytics */ "./node_modules/sketch-module-google-analytics/index.js");
 /* harmony import */ var sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _defaults_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaults.js */ "./src/defaults.js");
 
-
-/* harmony default export */ __webpack_exports__["default"] = (function (context, action, label, value) {
+/* harmony default export */ __webpack_exports__["default"] = (function (label, value) {
+  var ID = 'UA-5738625-2';
   var payload = {};
-  payload.ec = _defaults_js__WEBPACK_IMPORTED_MODULE_1__["PLUGIN_NAME"];
-
-  if (action) {
-    payload.ea = action;
-  }
+  payload.ec = context.plugin.name();
+  payload.ea = context.command.name();
 
   if (label) {
     payload.el = label;
@@ -170,26 +166,8 @@ __webpack_require__.r(__webpack_exports__);
     payload.ev = value;
   }
 
-  return sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0___default()(context, _defaults_js__WEBPACK_IMPORTED_MODULE_1__["GA_TRACKING_ID"], 'event', payload);
+  return sketch_module_google_analytics__WEBPACK_IMPORTED_MODULE_0___default()(context, ID, 'event', payload);
 });
-
-/***/ }),
-
-/***/ "./src/defaults.js":
-/*!*************************!*\
-  !*** ./src/defaults.js ***!
-  \*************************/
-/*! exports provided: PLUGIN_NAME, PLUGIN_KEY, GA_TRACKING_ID */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLUGIN_NAME", function() { return PLUGIN_NAME; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLUGIN_KEY", function() { return PLUGIN_KEY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GA_TRACKING_ID", function() { return GA_TRACKING_ID; });
-var PLUGIN_NAME = "Homebrew",
-    PLUGIN_KEY = "com.gunesozgur.sketch.homebrew",
-    GA_TRACKING_ID = "UA-5738625-2";
 
 /***/ }),
 
@@ -210,33 +188,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var scriptName = "Space Vertically";
+var scriptName = 'Space Vertically';
 /* harmony default export */ __webpack_exports__["default"] = (function (context) {
   var doc = sketch_dom__WEBPACK_IMPORTED_MODULE_0___default.a.getSelectedDocument();
   var selection = doc.selectedLayers;
   var message;
 
   if (selection.length <= 1) {
-    message = "Please select at least 2 layers.";
+    message = 'Please select at least 2 layers.';
     Object(_analytics_js__WEBPACK_IMPORTED_MODULE_2__["default"])(context, scriptName, message);
-    sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ": " + message);
+    sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ': ' + message);
   } else {
-    sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.getInputFromUser("Vertical Spacing (px):", {
+    sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.getInputFromUser('Vertical Spacing (px):', {
       initialValue: 0
     }, function (err, value) {
-      if (err) {
-        // most likely the user canceled the input
-        return;
+      if (err) {// most likely the user canceled the input
       } else if (!Number.isInteger(Number(value))) {
         // accept integer only
-        message = "Please enter numbers only.";
+        message = 'Please enter numbers only.';
         Object(_analytics_js__WEBPACK_IMPORTED_MODULE_2__["default"])(context, scriptName, message);
-        sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ": " + message);
+        sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ': ' + message);
       } else {
         setSpacing(selection, value);
-        message = value + " px";
+        message = value + ' px';
         Object(_analytics_js__WEBPACK_IMPORTED_MODULE_2__["default"])(context, scriptName, message);
-        sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ": " + message);
+        sketch_ui__WEBPACK_IMPORTED_MODULE_1___default.a.message(scriptName + ': ' + message);
       }
     });
   }

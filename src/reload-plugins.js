@@ -1,16 +1,20 @@
-import UI from 'sketch/ui'
 import analytics from './analytics.js'
+import * as UI from './ui.js'
 
-const scriptName = "Reload Plugins"
-
-export default function(context) {
-  let paneController = MSPreferencesController.sharedController();
-  let pane = paneController.currentPreferencePane();
-  if (!pane) {
-    pane = MSPluginsPreferencePane.alloc().initWithPreferencesController(paneController);
+export default context => {
+  try {
+    let paneController = MSPreferencesController.sharedController()
+    let pane = paneController.currentPreferencePane()
+    if (!pane) {
+      pane = MSPluginsPreferencePane.alloc()
+        .initWithPreferencesController(paneController)
+    }
+    pane.pluginManager().reloadPlugins()
+    analytics('Done', 1)
+    UI.success('Plugins reloaded.')
+  } catch (e) {
+    console.log(e)
+    analytics('Fail')
+    return UI.error('Something went wrong!')
   }
-  let pluginManager = pane.pluginManager();
-  pluginManager.reloadPlugins();
-  analytics(context, scriptName)
-  UI.message(scriptName + ": Done!")
 }
