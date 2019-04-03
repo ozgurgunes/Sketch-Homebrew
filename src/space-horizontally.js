@@ -11,7 +11,7 @@ export default function (context) {
 
   if (selection.length <= 1) {
     message = 'Please select at least 2 layers.'
-    analytics(context, scriptName, message)
+    analytics(scriptName, message)
     UI.message(scriptName + ': ' + message)
   } else {
     UI.getInputFromUser('Horizontal Spacing (px):',
@@ -25,12 +25,12 @@ export default function (context) {
         } else if (!Number.isInteger(Number(value))) {
           // accept integer only
           message = 'Please enter numbers only.'
-          analytics(context, scriptName, message)
+          analytics(scriptName, message)
           UI.message(scriptName + ': ' + message)
         } else {
           setSpacing(selection, value)
           message = value + ' px'
-          analytics(context, scriptName, message)
+          analytics(scriptName, message)
           UI.message(scriptName + ': ' + message)
         }
       }

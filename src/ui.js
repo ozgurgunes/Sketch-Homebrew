@@ -35,6 +35,13 @@ export const dialog = (info, accessory, buttons, message) => {
   return alert.runModal()
 }
 
+export const textField = initial => {
+  let accessory = NSTextField.alloc()
+    .initWithFrame(NSMakeRect(0, 0, 240, 25))
+  accessory.setStringValue((initial) || '')
+  return accessory
+}
+
 export const comboBox = items => {
   let accessory = NSComboBox.alloc()
     .initWithFrame(NSMakeRect(0, 0, 240, 25))
@@ -48,6 +55,22 @@ export const popUpButton = items => {
   let accessory = NSPopUpButton.alloc()
     .initWithFrame(NSMakeRect(0, 0, 240, 25))
   accessory.addItemsWithTitles(items)
+  return accessory
+}
+
+export const slider = options => {
+  let accessory = NSSlider.alloc()
+    .initWithFrame(NSMakeRect(0, 0, 240, 25))
+  accessory.setFloatValue(Number(options.initialValue || 0))
+  accessory.setMinValue(options.minValue || 1)
+  accessory.setMaxValue(options.maxValue || 10)
+  accessory.setAllowsTickMarkValuesOnly(true)
+  accessory.setNumberOfTickMarks(parseInt(
+    1 + (
+      (typeof options.maxValue !== 'undefined' ? options.maxValue : 1) -
+      (typeof options.minValue !== 'undefined' ? options.minValue : 0)) /
+      options.increment,
+    10))
   return accessory
 }
 

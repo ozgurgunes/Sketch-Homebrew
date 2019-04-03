@@ -60,7 +60,7 @@ export default function (context) {
     artboard.setLayout(layout)
 
     var message = layoutType + ' - ' + screens
-    analytics(context, scriptName, message)
+    analytics(scriptName, message)
     UI.message(scriptName + ': ' + message)
   }
 }

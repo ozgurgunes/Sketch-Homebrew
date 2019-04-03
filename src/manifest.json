@@ -33,8 +33,13 @@
     {
       "name": "Set Layout",
       "identifier": "homebrew.set-layout",
-      "shortcut" : "cmd ctrl l",
       "script": "./set-layout.js"
+    },
+    {
+      "name": "Go-Grid",
+      "identifier": "homebrew.go-grid",
+      "shortcut" : "cmd ctrl l",
+      "script": "./go-grid.js"
     },
     {
       "name": "Select Unused Symbols",
@@ -75,6 +80,7 @@
       "homebrew.reset-image-aspect-ratio",
       "-",
       "homebrew.set-layout",
+      "homebrew.go-grid",
       "-",
       "homebrew.space-vertically",
       "homebrew.space-horizontally",

@@ -1,6 +1,6 @@
 import sketch from 'sketch/dom'
 import settings from 'sketch/settings'
-import UI from 'sketch/ui'
+import * as UI from './ui'
 
 const PLUGIN = context.plugin.name()
 const COMMAND = context.command.name()
@@ -32,13 +32,25 @@ var doc = sketch.getSelectedDocument()
 var libraries = sketch.getLibraries()
 var selection = doc.selectedLayers
 
-export default function (context) {
-  var c = []
-  for (var o in context) {
-    console.log('%o', o)
-  }
+const randomDate = (start, end) => {
+  start = start || new Date()
+  end = end || new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+  let range = end.getTime() - start.getTime()
+  return new Date(Math.random() * range + start.getTime())
+}
 
-  console.log('%o', context.plugin)
+export default function (context) {
+  var options = {
+    weekday: 'long', // long, short, narrow
+    year: 'numeric', // numeric, 2-digit
+    month: 'long', // numeric, 2-digit, long, short, narrow
+    day: 'numeric', // numeric, 2-digit
+    hour: 'numeric', // numeric, 2-digit
+    minute: 'numeric', // numeric, 2-digit
+    //second: 'numeric', // numeric, 2-digit
+    hour12: false    
+  }
+  console.log(randomDate().toLocaleDateString('tr-TR', options))
 }
 
 function systemLog (context) {
