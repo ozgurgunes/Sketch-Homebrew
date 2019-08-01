@@ -59,6 +59,11 @@
       "script": "./space-vertically.js"
     },
     {
+      "name": "Sequence Artboards",
+      "identifier": "homebrew.sequence-artboards",
+      "script": "./sequence-artboards.js"
+    },
+    {
       "name": "Zoom Info",
       "identifier": "homebrew.zoom-info",
       "shortcut" : "cmd alt z",
@@ -78,6 +83,7 @@
       "homebrew.reload-plugins",
       "homebrew.select-unused-symbols",
       "homebrew.reset-image-aspect-ratio",
+      "homebrew.sequence-artboards",
       "-",
       "homebrew.set-layout",
       "homebrew.go-grid",

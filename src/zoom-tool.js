@@ -12,7 +12,7 @@ export default context => {
       if (err) {
         // most likely the user canceled the input
 
-      } else if (!Number.isInteger(Number(value))) {
+      } else if (isNaN(value)) {
         // accept integer only
         var message = 'Please enter numbers only.'
         analytics('Fail')

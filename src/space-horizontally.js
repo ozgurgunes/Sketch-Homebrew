@@ -25,7 +25,7 @@ export default function (context) {
         } else if (!Number.isInteger(Number(value))) {
           // accept integer only
           message = 'Please enter numbers only.'
-          analytics(scriptName, message)
+          analytics(scriptName)
           UI.message(scriptName + ': ' + message)
         } else {
           setSpacing(selection, value)
