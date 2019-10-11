@@ -59,6 +59,27 @@
       "script": "./space-vertically.js"
     },
     {
+      "name": "Artboard Manager",
+      "identifier": "homebrew.artboard-manager",
+      "script": "./artboard-manager.js",
+      "handlers": {
+        "actions": {
+          "ArtboardChanged.finish": "ArtboardChanged",
+          "LayersMoved.finish": "LayersMoved",
+          "Duplicate.finish": "Duplicate",
+          "HandlerLostFocus": "Resize",
+          "ResizeArtboardToFit": "ResizeArtboardToFit",
+          "InsertArtboard.finish": "InsertArtboard"
+        }
+      }
+    },
+    {
+      "name": "Toggle Artboard Manager",
+      "script": "./artboard-manager.js",
+      "identifier": "homebrew.artboard-manager-toggle",
+      "handler": "toggleManager"
+    },
+    {
       "name": "Sequence Artboards",
       "identifier": "homebrew.sequence-artboards",
       "script": "./sequence-artboards.js"
@@ -83,6 +104,8 @@
       "homebrew.reload-plugins",
       "homebrew.select-unused-symbols",
       "homebrew.reset-image-aspect-ratio",
+      "-",
+      "homebrew.artboard-manager-toggle",
       "homebrew.sequence-artboards",
       "-",
       "homebrew.set-layout",
