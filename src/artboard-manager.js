@@ -1,6 +1,7 @@
 import sketch from 'sketch/dom'
 import settings from 'sketch/settings'
 import UI from 'sketch/ui'
+import analytics from './analytics.js'
 
 // Config
 const config = {
@@ -28,10 +29,16 @@ const message = (status) => {
   UI.message(emoji + 'Artboard Manager' + ': ' + (status ? "ON" : "OFF"))
 }
 
+const doc = sketch.getSelectedDocument()
+
 export function toggleManager (context) {
-  var setting = settings.settingForKey('artboard-manager-toggle')
-  settings.setSettingForKey('artboard-manager-toggle', !!!setting)
-  message(!!!setting)
+  var setting = settings.documentSettingForKey(doc, 'artboard-manager-toggle')
+  if (typeof setting === 'undefined') {
+    setting = true
+  }
+  settings.setDocumentSettingForKey(doc, 'artboard-manager-toggle', !setting)
+  analytics((!setting ? "ON" : "OFF"), 1)
+  message(!setting)
 }
 
 export function ArtboardChanged(context) {
@@ -52,7 +59,6 @@ export function ArtboardChanged(context) {
   }
   
 export function ArrangeArtboards(context) {
-  const doc = sketch.getSelectedDocument()
   const page = doc.selectedPage
   const symbolsPage = doc._object.documentData().symbolsPage()
 
@@ -62,8 +68,8 @@ export function ArrangeArtboards(context) {
     return
   }
 
-  var setting = !!settings.settingForKey('artboard-manager-toggle')
-  if (!setting) {
+  var setting = settings.documentSettingForKey(doc, 'artboard-manager-toggle')
+  if (!setting && typeof setting !== 'undefined') {
     return
   }
 

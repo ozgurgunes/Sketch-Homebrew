@@ -80,6 +80,11 @@
       "handler": "toggleManager"
     },
     {
+      "name": "Toggle Pixel Fitting",
+      "script": "./pixel-fitting.js",
+      "identifier": "homebrew.pixel-fitting-toggle"
+    },
+    {
       "name": "Sequence Artboards",
       "identifier": "homebrew.sequence-artboards",
       "script": "./sequence-artboards.js"
@@ -106,6 +111,7 @@
       "homebrew.reset-image-aspect-ratio",
       "-",
       "homebrew.artboard-manager-toggle",
+      "homebrew.pixel-fitting-toggle",
       "homebrew.sequence-artboards",
       "-",
       "homebrew.set-layout",
