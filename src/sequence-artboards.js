@@ -11,7 +11,8 @@ const getArtboards = () => {
     .filter(layer => [sketch.Types.Artboard, sketch.Types.SymbolMaster].includes(layer.type))
   if (artboards.length < 1) {
     analytics('Selection Error')
-    throw errorMessage('Please select artboards.')
+    message = 'Please select artboards.'
+    UI.message(scriptName + ': ' + message)
   } else {
     return artboards
   }
