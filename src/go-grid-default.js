@@ -21,7 +21,7 @@ const gutters = {
   'small': 24,
   'iPhone-Plus': 14,
   'iPhone': 16,
-  'x-small': 16,
+  'x-small': 8,
   'iPhone-5': 12
 }
 
