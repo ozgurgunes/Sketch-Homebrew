@@ -31,15 +31,16 @@
       "script": "./reset-image-aspect-ratio.js"
     },
     {
-      "name": "Set Layout",
-      "identifier": "homebrew.set-layout",
-      "script": "./set-layout.js"
+      "name": "Go-Grid Sidebar",
+      "identifier": "homebrew.go-grid-sidebar",
+      "shortcut" : "cmd alt ctrl l",
+      "script": "./go-grid-sidebar.js"
     },
     {
-      "name": "Go-Grid",
-      "identifier": "homebrew.go-grid",
+      "name": "Go-Grid Default",
+      "identifier": "homebrew.go-grid-default",
       "shortcut" : "cmd ctrl l",
-      "script": "./go-grid.js"
+      "script": "./go-grid-default.js"
     },
     {
       "name": "Select Unused Symbols",
@@ -114,8 +115,8 @@
       "homebrew.pixel-fitting-toggle",
       "homebrew.sequence-artboards",
       "-",
-      "homebrew.set-layout",
-      "homebrew.go-grid",
+      "homebrew.go-grid-sidebar",
+      "homebrew.go-grid-default",
       "-",
       "homebrew.space-vertically",
       "homebrew.space-horizontally",
