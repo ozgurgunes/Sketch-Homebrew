@@ -91,6 +91,11 @@
       "script": "./sequence-artboards.js"
     },
     {
+      "name": "Count Selection",
+      "identifier": "homebrew.count-selection",
+      "script": "./count-selection.js"
+    },
+    {
       "name": "Zoom Info",
       "identifier": "homebrew.zoom-info",
       "shortcut" : "cmd alt z",
@@ -108,12 +113,14 @@
     "items": [
       "homebrew.populate-overrides",
       "homebrew.reload-plugins",
-      "homebrew.select-unused-symbols",
       "homebrew.reset-image-aspect-ratio",
+      "-",
+      "homebrew.sequence-artboards",
+      "homebrew.count-selection",
+      "homebrew.select-unused-symbols",
       "-",
       "homebrew.artboard-manager-toggle",
       "homebrew.pixel-fitting-toggle",
-      "homebrew.sequence-artboards",
       "-",
       "homebrew.go-grid-sidebar",
       "homebrew.go-grid-default",

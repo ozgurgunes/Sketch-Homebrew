@@ -4,7 +4,7 @@ import * as UI from './ui'
 const sidebar = {
   'hd': 256,
   'x-large': 256,
-  'large': 240,
+  'large': 256,
   'medium': 240,
   'small': 240,
 }
@@ -12,7 +12,7 @@ const sidebar = {
 const margin = {
   'hd': 56,
   'x-large': 56,
-  'large': 44,
+  'large': 48,
   'medium': 44,
   'small': 36,
 }
