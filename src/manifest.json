@@ -31,6 +31,11 @@
       "script": "./reset-image-aspect-ratio.js"
     },
     {
+      "name": "Create Slice from Selection",
+      "identifier": "homebrew.slice-from-selection",
+      "script": "./slice-from-selection.js"
+    },
+    {
       "name": "Go-Grid Sidebar",
       "identifier": "homebrew.go-grid-sidebar",
       "shortcut" : "cmd alt ctrl l",
@@ -46,6 +51,11 @@
       "name": "Select Unused Symbols",
       "identifier": "homebrew.select-unused-symbols",
       "script": "./select-unused-symbols.js"
+    },
+    {
+      "name": "Select Artboards Except Covers",
+      "identifier": "homebrew.select-artboards",
+      "script": "./select-artboards.js"
     },
     {
       "name": "Space Horizontally",
@@ -114,10 +124,12 @@
       "homebrew.populate-overrides",
       "homebrew.reload-plugins",
       "homebrew.reset-image-aspect-ratio",
-      "-",
-      "homebrew.sequence-artboards",
-      "homebrew.count-selection",
       "homebrew.select-unused-symbols",
+      "-",
+      "homebrew.count-selection",
+      "homebrew.sequence-artboards",
+      "homebrew.select-artboards",
+      "homebrew.slice-from-selection",
       "-",
       "homebrew.artboard-manager-toggle",
       "homebrew.pixel-fitting-toggle",
