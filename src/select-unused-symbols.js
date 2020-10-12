@@ -1,7 +1,7 @@
 import analytics from './analytics.js'
 import * as UI from './ui.js'
 
-export default context => {
+export default function(context) {
   try {
     let symbols = context.document.currentPage().symbols()
     let symbolsLoop = symbols.objectEnumerator()

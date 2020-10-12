@@ -5,7 +5,7 @@ import analytics from './analytics.js'
 var doc = sketch.getSelectedDocument()
 var zoomValue = Math.round(100 * doc.sketchObject.zoomValue()) / 100
 
-export default context => {
+export default function() {
   analytics('Done', 1)
   UI.message('Zoom: ' + zoomValue * 100 + '%')
 }

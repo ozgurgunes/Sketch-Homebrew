@@ -1,3 +1,4 @@
+/* eslint-disable */
 import sketch from 'sketch/dom'
 import settings from 'sketch/settings'
 import * as UI from './ui'
@@ -32,14 +33,14 @@ var doc = sketch.getSelectedDocument()
 var libraries = sketch.getLibraries()
 var selection = doc.selectedLayers
 
-const randomDate = (start, end) => {
+function randomDate(start, end) {
   start = start || new Date()
   end = end || new Date(new Date().setFullYear(new Date().getFullYear() - 1))
   let range = end.getTime() - start.getTime()
   return new Date(Math.random() * range + start.getTime())
 }
 
-export default function (context) {
+export default function(context) {
   var options = {
     weekday: 'long', // long, short, narrow
     year: 'numeric', // numeric, 2-digit
@@ -48,12 +49,12 @@ export default function (context) {
     hour: 'numeric', // numeric, 2-digit
     minute: 'numeric', // numeric, 2-digit
     //second: 'numeric', // numeric, 2-digit
-    hour12: false    
+    hour12: false
   }
   console.log(randomDate().toLocaleDateString('tr-TR', options))
 }
 
-function systemLog (context) {
+function systemLog(context) {
   if (symbol) {
     libImportableSymbols(symbol.master.getLibrary())
     console.log('%s', '')
@@ -69,7 +70,7 @@ function systemLog (context) {
   }
 }
 
-function uncheckOverrides (symbol) {
+function uncheckOverrides(symbol) {
   symbol.overrides.forEach(override => {
     console.log('########################################')
     console.log("'NAME': %o", override.affectedLayer.name)
@@ -78,7 +79,7 @@ function uncheckOverrides (symbol) {
   })
 }
 
-function symbolOverrides (symbol) {
+function symbolOverrides(symbol) {
   console.log('########################################')
   console.log('#####  SYMBOL OVERRIDES  #####')
   console.log('########################################')
@@ -92,57 +93,63 @@ function symbolOverrides (symbol) {
   })
 }
 
-function libImportableSymbols (library) {
+function libImportableSymbols(library) {
   console.log('########################################')
   console.log('#####  IMPORTABLE SYMBOLS  #####')
   console.log('########################################')
   if (library) {
     console.log("'LIBRARY': %o", library.name)
-    library.getImportableSymbolReferencesForDocument(doc).forEach(importable => {
-      console.log('########################################')
-      console.log("'NAME': %o", importable.name)
-      console.log("'TYPE': %o", importable.objectType)
-      console.log("'ID': %o", importable.id)
-      // console.log("%o", override)
-    })
+    library
+      .getImportableSymbolReferencesForDocument(doc)
+      .forEach(importable => {
+        console.log('########################################')
+        console.log("'NAME': %o", importable.name)
+        console.log("'TYPE': %o", importable.objectType)
+        console.log("'ID': %o", importable.id)
+        // console.log("%o", override)
+      })
   }
 }
 
-function libImportableTextStyles (library) {
+function libImportableTextStyles(library) {
   console.log('########################################')
   console.log('#####  IMPORTABLE TEXT STYLES  #####')
   console.log('########################################')
   if (library) {
     console.log("'LIBRARY': %o", library.name)
-    library.getImportableTextStyleReferencesForDocument(doc).forEach(importable => {
-      console.log('%s', '')
-      console.log('########################################')
-      console.log("'NAME': %o", importable.name)
-      console.log("'TYPE': %o", importable.objectType)
-      console.log("'ID': %o", importable.id)
-      // console.log("%o", override)
-    })
+    library
+      .getImportableTextStyleReferencesForDocument(doc)
+      .forEach(importable => {
+        console.log('%s', '')
+        console.log('########################################')
+        console.log("'NAME': %o", importable.name)
+        console.log("'TYPE': %o", importable.objectType)
+        console.log("'ID': %o", importable.id)
+        // console.log("%o", override)
+      })
   }
 }
 
-function libImportableLayerStyles (library) {
+function libImportableLayerStyles(library) {
   console.log('########################################')
   console.log('#####  IMPORTABLE LAYER STYLES  #####')
   console.log('########################################')
   if (library) {
     console.log("'LIBRARY': %o", library.name)
-    library.getImportableLayerStyleReferencesForDocument(doc).forEach(importable => {
-      console.log('%s', '')
-      console.log('########################################')
-      console.log("'NAME': %o", importable.name)
-      console.log("'TYPE': %o", importable.objectType)
-      console.log("'ID': %o", importable.id)
-      // console.log("%o", override)
-    })
+    library
+      .getImportableLayerStyleReferencesForDocument(doc)
+      .forEach(importable => {
+        console.log('%s', '')
+        console.log('########################################')
+        console.log("'NAME': %o", importable.name)
+        console.log("'TYPE': %o", importable.objectType)
+        console.log("'ID': %o", importable.id)
+        // console.log("%o", override)
+      })
   }
 }
 
-function docSymbols (document) {
+function docSymbols(document) {
   console.log('########################################')
   console.log('#####  SYMBOLS  #####')
   console.log('########################################')
@@ -156,7 +163,7 @@ function docSymbols (document) {
   })
 }
 
-function docTextStyles (document) {
+function docTextStyles(document) {
   console.log('########################################')
   console.log('#####  TEXT STYLES  #####')
   console.log('########################################')
@@ -169,7 +176,7 @@ function docTextStyles (document) {
   })
 }
 
-function docLayerStyles (document) {
+function docLayerStyles(document) {
   console.log('########################################')
   console.log('#####  LAYER STYLES  #####')
   console.log('########################################')

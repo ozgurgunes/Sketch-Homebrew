@@ -2,8 +2,8 @@ import settings from 'sketch/settings'
 import UI from 'sketch/ui'
 import analytics from './analytics.js'
 
-const prefString = "tryToFitToPixelBounds"
-const message = (status) => {
+const prefString = 'tryToFitToPixelBounds'
+const message = status => {
   let emoji = ''
   switch (status) {
     case false:
@@ -13,15 +13,15 @@ const message = (status) => {
       emoji = '✅   '
       break
   }
-  UI.message(emoji + 'Pixel Fitting' + ': ' + (status ? "ON" : "OFF"))
+  UI.message(emoji + 'Pixel Fitting' + ': ' + (status ? 'ON' : 'OFF'))
 }
 
-export default context => {
+export default function() {
   let setting = settings.globalSettingForKey(prefString)
   if (typeof setting === 'undefined') {
     setting = 1
   }
   settings.setGlobalSettingForKey(prefString, !setting)
-  analytics((!setting ? "ON" : "OFF"), 1)
+  analytics(!setting ? 'ON' : 'OFF', 1)
   message(!setting)
 }

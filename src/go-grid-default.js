@@ -2,32 +2,32 @@ import analytics from './analytics'
 import * as UI from './ui'
 
 const containers = {
-  'hd': 1784,
-  'x-large': 1360,
-  'large': 1216,
-  'medium': 936,
-  'small': 744,
-  'iPhone-Plus': 382,
-  'iPhone': 344,
-  'x-small': 328,
-  'iPhone-5': 288
+  hd: 1784,
+  xLarge: 1360,
+  large: 1216,
+  medium: 936,
+  small: 744,
+  iPhonePlus: 382,
+  iPhone: 344,
+  xSmall: 328,
+  iPhone5: 288
 }
 
 const gutters = {
-  'hd': 40,
-  'x-large': 32,
-  'large': 32,
-  'medium': 24,
-  'small': 24,
-  'iPhone-Plus': 14,
-  'iPhone': 16,
-  'x-small': 8,
-  'iPhone-5': 12
+  hd: 40,
+  xLarge: 32,
+  large: 32,
+  medium: 24,
+  small: 24,
+  iPhonePlus: 14,
+  iPhone: 16,
+  xSmall: 8,
+  iPhone5: 12
 }
 
 var rounded = false
 
-export default context => {
+export default function(context) {
   try {
     let doc = context.document
     let artboard = doc.currentPage().currentArtboard()
@@ -36,32 +36,35 @@ export default context => {
     if (columns) {
       let container
       switch (true) {
-        case (artboard.frame().width() >= 1920):
+        case artboard.frame().width() >= 1920:
           container = 'hd'
           break
-        case (artboard.frame().width() >= 1440 && artboard.frame().width() < 1920):
-          container = 'x-large'
+        case artboard.frame().width() >= 1440 &&
+          artboard.frame().width() < 1920:
+          container = 'xLarge'
           break
-        case (artboard.frame().width() >= 1280 && artboard.frame().width() < 1440):
+        case artboard.frame().width() >= 1280 &&
+          artboard.frame().width() < 1440:
           container = 'large'
           break
-        case (artboard.frame().width() >= 1024 && artboard.frame().width() < 1280):
+        case artboard.frame().width() >= 1024 &&
+          artboard.frame().width() < 1280:
           container = 'medium'
           break
-        case (artboard.frame().width() >= 768 && artboard.frame().width() < 1024):
+        case artboard.frame().width() >= 768 && artboard.frame().width() < 1024:
           container = 'small'
           break
-        case (artboard.frame().width() >= 414 && artboard.frame().width() < 768):
-          container = 'iPhone-Plus'
+        case artboard.frame().width() >= 414 && artboard.frame().width() < 768:
+          container = 'iPhonePlus'
           break
-        case (artboard.frame().width() >= 375 && artboard.frame().width() < 414):
+        case artboard.frame().width() >= 375 && artboard.frame().width() < 414:
           container = 'iPhone'
           break
-        case (artboard.frame().width() >= 360 && artboard.frame().width() < 375):
-          container = 'x-small'
+        case artboard.frame().width() >= 360 && artboard.frame().width() < 375:
+          container = 'xSmall'
           break
-        case (artboard.frame().width() < 360):
-          container = 'iPhone-5'
+        case artboard.frame().width() < 360:
+          container = 'iPhone5'
           break
       }
 
@@ -71,9 +74,13 @@ export default context => {
 
       analytics(container + ' - ' + columns, 1)
       if (rounded) {
-        UI.error('Layout set to ' + columns + ' columns with sub-pixels. Numbers are rounded!')        
+        UI.error(
+          'Layout set to ' +
+            columns +
+            ' columns with sub-pixels. Numbers are rounded!'
+        )
       } else {
-        UI.success('Layout set to ' + columns + ' columns.')        
+        UI.success('Layout set to ' + columns + ' columns.')
       }
     }
   } catch (e) {
@@ -84,7 +91,7 @@ export default context => {
   }
 }
 
-const calculateLayout = (artboard, container, columns) => {
+function calculateLayout(artboard, container, columns) {
   let layout = MSLayoutGrid.alloc().init()
   let ruler = artboard.horizontalRulerData()
 
@@ -109,15 +116,15 @@ const calculateLayout = (artboard, container, columns) => {
   return layout
 }
 
-const clearGuides = ruler => {
+function clearGuides(ruler) {
   if (ruler.numberOfGuides()) {
     ruler.removeGuideAtIndex(0)
     clearGuides(ruler)
   }
 }
 
-const getInput = columns => {
-  columns = (columns) || 12
+function getInput(columns) {
+  columns = columns || 12
   let buttons = ['Set Layout', 'Cancel']
   let info = 'How many columns do you want?'
   let accessory = UI.textField(columns)
@@ -125,11 +132,11 @@ const getInput = columns => {
   let result = accessory.stringValue()
   if (response === 1000) {
     switch (true) {
-      case (!result.length() > 0):
+      case !result.length() > 0:
         // User clicked "OK" without entering a value.
         // Return dialog until user enters anyting or clicks "Cancel".
         return getInput()
-      case (!Number(result) || result > 24):
+      case !Number(result) || result > 24:
         throw UI.dialog('Please enter a number 24 or less.')
       default:
         return result

@@ -2,11 +2,12 @@ import sketch from 'sketch/dom'
 import analytics from './analytics.js'
 import * as UI from './ui.js'
 
-export default context => {
+export default function() {
   try {
     let doc = sketch.getSelectedDocument()
-    let symbols = doc.selectedLayers.layers
-      .filter(layer => layer.type == sketch.Types.SymbolInstance)
+    let symbols = doc.selectedLayers.layers.filter(
+      layer => layer.type == sketch.Types.SymbolInstance
+    )
     if (symbols.length < 1) {
       analytics('Selection Error')
       throw UI.error('Please select symbols!')

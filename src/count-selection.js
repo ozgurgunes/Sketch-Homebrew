@@ -4,7 +4,7 @@ import analytics from './analytics.js'
 
 var doc = sketch.getSelectedDocument()
 
-export default () => {
+export default function() {
   let count = doc.selectedLayers.length
   if (count < 1) {
     analytics('No Selection')

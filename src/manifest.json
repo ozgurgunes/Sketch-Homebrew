@@ -2,18 +2,17 @@
   "name": "Homebrew",
   "description": "A collection of Sketch utilities.",
   "identifier": "com.gunesozgur.sketch.homebrew",
-  "homepage": "https://github.com/ozgurgunes/Sketch-Homebrew",
-  "appcast": "https://raw.githubusercontent.com/ozgurgunes/Sketch-Homebrew/master/.appcast.xml",
-  "author": "Özgür Güneş",
+  "author": "Ozgur Gunes",
   "authorEmail": "o.gunes@gmail.com",
-  "compatibleVersion": 3,
-  "bundleVersion": 1,
+  "$schema": "https://raw.githubusercontent.com/sketch-hq/SketchAPI/develop/docs/sketch-plugin-manifest-schema.json",
+  "appcast": "https://raw.githubusercontent.com/ozgurgunes/Sketch-Homebrew/master/.appcast.xml",
+  "homepage": "https://github.com/ozgurgunes/Sketch-Homebrew",
   "icon": "icon.png",
   "commands": [
     {
       "name": "Development Logger",
-      "identifier": "homebrew.dev",
-      "script": "./dev.js"
+      "identifier": "homebrew.dev-logger",
+      "script": "./dev-logger.js"
     },
     {
       "name": "Populate Overrides",
@@ -68,27 +67,6 @@
       "identifier": "homebrew.space-vertically",
       "shortcut" : "cmd ctrl v",
       "script": "./space-vertically.js"
-    },
-    {
-      "name": "Artboard Manager",
-      "identifier": "homebrew.artboard-manager",
-      "script": "./artboard-manager.js",
-      "handlers": {
-        "actions": {
-          "ArtboardChanged.finish": "ArtboardChanged",
-          "LayersMoved.finish": "LayersMoved",
-          "Duplicate.finish": "Duplicate",
-          "HandlerLostFocus": "Resize",
-          "ResizeArtboardToFit": "ResizeArtboardToFit",
-          "InsertArtboard.finish": "InsertArtboard"
-        }
-      }
-    },
-    {
-      "name": "Toggle Artboard Manager",
-      "script": "./artboard-manager.js",
-      "identifier": "homebrew.artboard-manager-toggle",
-      "handler": "toggleManager"
     },
     {
       "name": "Toggle Pixel Fitting",

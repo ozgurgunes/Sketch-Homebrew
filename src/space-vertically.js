@@ -4,7 +4,7 @@ import analytics from './analytics.js'
 
 const scriptName = 'Space Vertically'
 
-export default function (context) {
+export default function() {
   const doc = sketch.getSelectedDocument()
   const selection = doc.selectedLayers
   var message
@@ -14,14 +14,14 @@ export default function (context) {
     analytics(scriptName, message)
     UI.message(scriptName + ': ' + message)
   } else {
-    UI.getInputFromUser('Vertical Spacing (px):',
+    UI.getInputFromUser(
+      'Vertical Spacing (px):',
       {
         initialValue: 0
       },
       (err, value) => {
         if (err) {
           // most likely the user canceled the input
-
         } else if (!Number.isInteger(Number(value))) {
           // accept integer only
           message = 'Please enter numbers only.'
@@ -38,7 +38,7 @@ export default function (context) {
   }
 }
 
-function setSpacing (selection, value) {
+function setSpacing(selection, value) {
   var elements = []
   var top = 0
   var count = 0
@@ -49,7 +49,7 @@ function setSpacing (selection, value) {
   })
 
   // sort layers by vertical positions
-  elements.sort(function (a, b) {
+  elements.sort(function(a, b) {
     return a.frame.y - b.frame.y
   })
 

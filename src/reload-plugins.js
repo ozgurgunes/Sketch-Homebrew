@@ -1,13 +1,14 @@
 import analytics from './analytics.js'
 import * as UI from './ui.js'
 
-export default context => {
+export default function() {
   try {
     let paneController = MSPreferencesController.sharedController()
     let pane = paneController.currentPreferencePane()
     if (!pane) {
-      pane = MSPluginsPreferencePane.alloc()
-        .initWithPreferencesController(paneController)
+      pane = MSPluginsPreferencePane.alloc().initWithPreferencesController(
+        paneController
+      )
     }
     pane.pluginManager().reloadPlugins()
     analytics('Done', 1)
