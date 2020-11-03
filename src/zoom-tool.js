@@ -1,29 +1,36 @@
 import sketch from 'sketch/dom'
-import UI from 'sketch/ui'
-import analytics from './analytics.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import { showMessage, alert, textField } from '@ozgurgunes/sketch-plugin-ui'
 
 var doc = sketch.getSelectedDocument()
 var zoomValue = Math.round(100 * doc.sketchObject.zoomValue()) / 100
 
-export default function() {
-  UI.getInputFromUser(
-    'Zoom (%):',
-    { initialValue: zoomValue * 100 },
-    (err, value) => {
-      if (err) {
-        // most likely the user canceled the input
-      } else if (isNaN(value)) {
-        // accept integer only
-        var message = 'Please enter numbers only.'
-        analytics('Fail')
-        UI.message('Zoom: ' + message)
-      } else {
-        setZoom(value)
-        analytics('Done', 1)
-        UI.message('Zoom: ' + value + '%')
-      }
+export default function () {
+  let value = getInput()
+  setZoom(value)
+  analytics()
+  showMessage(value + '%')
+}
+
+function getInput(initial) {
+  initial = initial || zoomValue * 100
+  let buttons = ['Arrange', 'Cancel']
+  let info = 'Zoom (%):'
+  let accessory = textField(initial)
+  let response = alert(info, buttons, accessory).runModal()
+  let result = accessory.stringValue()
+  if (response === 1000) {
+    switch (true) {
+      case !result.length() > 0:
+        // User clicked "OK" without entering a value.
+        // Return dialog until user enters anyting or clicks "Cancel".
+        return getInput()
+      case !Number(result):
+        throw alert('Please enter numbers only.').runModal()
+      default:
+        return result
     }
-  )
+  }
 }
 
 function setZoom(zoom) {

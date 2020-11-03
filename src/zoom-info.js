@@ -1,11 +1,11 @@
 import sketch from 'sketch/dom'
-import UI from 'sketch/ui'
-import analytics from './analytics.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import { showMessage } from '@ozgurgunes/sketch-plugin-ui'
 
 var doc = sketch.getSelectedDocument()
 var zoomValue = Math.round(100 * doc.sketchObject.zoomValue()) / 100
 
-export default function() {
-  analytics('Done', 1)
-  UI.message('Zoom: ' + zoomValue * 100 + '%')
+export default function () {
+  analytics()
+  showMessage(zoomValue * 100 + '%')
 }

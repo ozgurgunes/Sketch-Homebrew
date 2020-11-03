@@ -1,5 +1,5 @@
-import analytics from './analytics.js'
-import * as UI from './ui.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import { errorMessage, successMessage } from '@ozgurgunes/sketch-plugin-ui'
 
 export default function(context) {
   try {
@@ -14,9 +14,9 @@ export default function(context) {
       }
     }
     analytics('Done', 1)
-    UI.success(c + ' symbols selected.')
+    successMessage(c + ' symbols selected.')
   } catch (e) {
     console.log(e)
-    return UI.error('Something went wrong!')
+    return errorMessage('Something went wrong!')
   }
 }

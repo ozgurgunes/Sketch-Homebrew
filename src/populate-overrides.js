@@ -1,6 +1,6 @@
 import sketch from 'sketch/dom'
-import analytics from './analytics.js'
-import * as UI from './ui.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import { errorMessage, successMessage } from '@ozgurgunes/sketch-plugin-ui'
 
 export default function() {
   try {
@@ -10,7 +10,7 @@ export default function() {
     )
     if (symbols.length < 1) {
       analytics('Selection Error')
-      throw UI.error('Please select symbols!')
+      throw errorMessage('Please select symbols!')
     }
     let c = 0
     symbols.map(symbol => {
@@ -22,7 +22,9 @@ export default function() {
         })
     })
     analytics('Done', c)
-    UI.success(c + ' overrides in ' + symbols.length + ' symbols populated.')
+    successMessage(
+      c + ' overrides in ' + symbols.length + ' symbols populated.'
+    )
   } catch (e) {
     console.log(e)
     return e

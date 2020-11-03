@@ -1,7 +1,6 @@
 /* eslint-disable */
 import sketch from 'sketch/dom'
 import settings from 'sketch/settings'
-import * as UI from './ui'
 
 const PLUGIN = context.plugin.name()
 const COMMAND = context.command.name()

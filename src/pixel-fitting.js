@@ -1,6 +1,6 @@
 import settings from 'sketch/settings'
-import UI from 'sketch/ui'
-import analytics from './analytics.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import { showMessage } from '@ozgurgunes/sketch-plugin-ui'
 
 const prefString = 'tryToFitToPixelBounds'
 const message = status => {
@@ -13,7 +13,7 @@ const message = status => {
       emoji = '✅   '
       break
   }
-  UI.message(emoji + 'Pixel Fitting' + ': ' + (status ? 'ON' : 'OFF'))
+  showMessage(emoji + 'Pixel Fitting' + ': ' + (status ? 'ON' : 'OFF'))
 }
 
 export default function() {

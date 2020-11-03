@@ -1,5 +1,11 @@
-import * as UI from './ui.js'
-import analytics from './analytics.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import {
+  errorMessage,
+  successMessage,
+  alert,
+  textField
+} from '@ozgurgunes/sketch-plugin-ui'
+
 
 var doc = context.document
 var selection = context.selection
@@ -9,7 +15,7 @@ var rect = handler.selectedRect()
 export default function() {
   if (selection.count() == 0) {
     analytics('No Selection')
-    throw UI.message("You don't have any selection.", 'error')
+    throw errorMessage("You don't have any selection.")
   }
 
   let offset = getInput()
@@ -33,7 +39,7 @@ export default function() {
     doc.currentPage().changeSelectionBySelectingLayers([slice])
 
     analytics('Slice Created', 1)
-    return UI.message('Slice created', 'success')
+    return successMessage('Slice created')
   }
 }
 
@@ -41,13 +47,13 @@ function getInput() {
   let offset = '0'
   let buttons = ['Set Offset', 'Cancel']
   let info = 'Please specify the offset of the slice.'
-  let accessory = UI.textField(offset)
-  let response = UI.dialog(info, accessory, buttons)
+  let accessory = textField(offset)
+  let response = alert(info, buttons, accessory).runModal()
   let result = accessory.stringValue()
   if (response === 1000) {
     switch (true) {
       case !Number.isInteger(Number(result)) || result < 0:
-        UI.message('Please enter a number 0 or greater.', 'error')
+        errorMessage('Please enter a number 0 or greater.')
         return getInput()
       default:
         return result

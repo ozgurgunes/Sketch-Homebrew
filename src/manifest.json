@@ -10,9 +10,68 @@
   "icon": "icon.png",
   "commands": [
     {
-      "name": "Development Logger",
-      "identifier": "homebrew.dev-logger",
-      "script": "./dev-logger.js"
+      "name": "Development Log",
+      "identifier": "homebrew.dev-log",
+      "script": "./_dev-log.js"
+    },
+    {
+      "name": "Development Test",
+      "identifier": "homebrew.dev-test",
+      "script": "./_dev-test.js"
+    },
+    {
+      "name": "Artboard Manager",
+      "identifier": "homebrew.artboard-manager",
+      "script": "./artboard-manager.js",
+      "handlers": {
+        "actions": {
+          "ArtboardChanged.finish": "ArtboardChanged",
+          "LayersMoved.finish": "LayersMoved",
+          "Duplicate.finish": "Duplicate",
+          "HandlerLostFocus": "Resize",
+          "ResizeArtboardToFit": "ResizeArtboardToFit",
+          "InsertArtboard.finish": "InsertArtboard"
+        }
+      }
+    },
+    {
+      "name": "Toggle Artboard Manager",
+      "script": "./artboard-manager.js",
+      "identifier": "homebrew.artboard-manager-toggle",
+      "handler": "toggleManager"
+    },
+    {
+      "name": "Count Selection",
+      "identifier": "homebrew.count-selection",
+      "script": "./count-selection.js"
+    },
+    {
+      "name": "Generate Skeleton",
+      "identifier": "homebrew.generate-skeleton",
+      "script": "./generate-skeleton.js"
+    },
+    {
+      "name": "Go-Grid Default",
+      "identifier": "homebrew.go-grid-default",
+      "shortcut" : "cmd ctrl l",
+      "script": "./go-grid-default.js"
+    },
+    {
+      "name": "Go-Grid Sidebar",
+      "identifier": "homebrew.go-grid-sidebar",
+      "shortcut" : "cmd shift ctrl l",
+      "script": "./go-grid-sidebar.js"
+    },
+    {
+      "name": "Go-Grid Toolbar",
+      "identifier": "homebrew.go-grid-sidebar",
+      "shortcut" : "cmd alt ctrl l",
+      "script": "./go-grid-sidebar.js"
+    },
+    {
+      "name": "Toggle Pixel Fitting",
+      "script": "./pixel-fitting.js",
+      "identifier": "homebrew.pixel-fitting-toggle"
     },
     {
       "name": "Populate Overrides",
@@ -30,21 +89,9 @@
       "script": "./reset-image-aspect-ratio.js"
     },
     {
-      "name": "Create Slice from Selection",
-      "identifier": "homebrew.slice-from-selection",
-      "script": "./slice-from-selection.js"
-    },
-    {
-      "name": "Go-Grid Sidebar",
-      "identifier": "homebrew.go-grid-sidebar",
-      "shortcut" : "cmd alt ctrl l",
-      "script": "./go-grid-sidebar.js"
-    },
-    {
-      "name": "Go-Grid Default",
-      "identifier": "homebrew.go-grid-default",
-      "shortcut" : "cmd ctrl l",
-      "script": "./go-grid-default.js"
+      "name": "Select Artboards Except Covers",
+      "identifier": "homebrew.select-artboards",
+      "script": "./select-artboards.js"
     },
     {
       "name": "Select Unused Symbols",
@@ -52,9 +99,14 @@
       "script": "./select-unused-symbols.js"
     },
     {
-      "name": "Select Artboards Except Covers",
-      "identifier": "homebrew.select-artboards",
-      "script": "./select-artboards.js"
+      "name": "Sequence Artboards",
+      "identifier": "homebrew.sequence-artboards",
+      "script": "./sequence-artboards.js"
+    },
+    {
+      "name": "Create Slice from Selection",
+      "identifier": "homebrew.slice-from-selection",
+      "script": "./slice-from-selection.js"
     },
     {
       "name": "Space Horizontally",
@@ -67,21 +119,6 @@
       "identifier": "homebrew.space-vertically",
       "shortcut" : "cmd ctrl v",
       "script": "./space-vertically.js"
-    },
-    {
-      "name": "Toggle Pixel Fitting",
-      "script": "./pixel-fitting.js",
-      "identifier": "homebrew.pixel-fitting-toggle"
-    },
-    {
-      "name": "Sequence Artboards",
-      "identifier": "homebrew.sequence-artboards",
-      "script": "./sequence-artboards.js"
-    },
-    {
-      "name": "Count Selection",
-      "identifier": "homebrew.count-selection",
-      "script": "./count-selection.js"
     },
     {
       "name": "Zoom Info",
@@ -99,10 +136,13 @@
   "menu": {
     "title": "_Homebrew",
     "items": [
-      "homebrew.populate-overrides",
+      "homebrew.dev-test",
       "homebrew.reload-plugins",
+      "-",
+      "homebrew.populate-overrides",
       "homebrew.reset-image-aspect-ratio",
       "homebrew.select-unused-symbols",
+      "homebrew.generate-skeleton",
       "-",
       "homebrew.count-selection",
       "homebrew.sequence-artboards",
@@ -112,8 +152,9 @@
       "homebrew.artboard-manager-toggle",
       "homebrew.pixel-fitting-toggle",
       "-",
-      "homebrew.go-grid-sidebar",
       "homebrew.go-grid-default",
+      "homebrew.go-grid-sidebar",
+      "homebrew.go-grid-toolbar",
       "-",
       "homebrew.space-vertically",
       "homebrew.space-horizontally",

@@ -1,60 +1,54 @@
 import sketch from 'sketch/dom'
-import UI from 'sketch/ui'
-import analytics from './analytics.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import {
+  errorMessage,
+  successMessage,
+  alert,
+  textField,
+} from '@ozgurgunes/sketch-plugin-ui'
 
-const scriptName = 'Sequence Artboards'
-
-var selection = sketch.getSelectedDocument().selectedLayers
-
-function getArtboards() {
+export default function () {
+  let selection = sketch.getSelectedDocument().selectedLayers
   let artboards = selection.layers.filter(layer =>
     [sketch.Types.Artboard, sketch.Types.SymbolMaster].includes(layer.type)
   )
   if (artboards.length < 1) {
     analytics('Selection Error')
-    UI.message(scriptName + ': ' + 'Please select artboards.')
-  } else {
-    return artboards
+    return errorMessage('Please select artboards.')
   }
+  let value = getInput()
+  increment(artboards, value)
+  analytics('Artboards Sequenced', artboards.length)
+  successMessage(artboards.length + ' artboards updated.')
 }
 
-export default function() {
-  try {
-    let artboards = getArtboards()
-    let message
-    UI.getInputFromUser(
-      'Increment:',
-      {
-        initialValue: 0
-      },
-      (err, value) => {
-        if (err) {
-          // most likely the user canceled the input
-        } else if (!Number.isInteger(Number(value))) {
-          // accept integer only
-          message = 'Please enter numbers only.'
-          analytics(scriptName)
-          UI.message(scriptName + ': ' + message)
-        } else {
-          increment(value)
-          message = artboards.length + ' artboards updated.'
-          analytics(scriptName, artboards.length)
-          UI.message(scriptName + ': ' + message)
-        }
-      }
-    )
-  } catch (e) {
-    console.log(e)
-    return e
-  }
-}
-
-function increment(value) {
+function increment(artboards, value) {
   // convert selection to standard array
-  selection.forEach(artboard => {
+  artboards.forEach(artboard => {
     artboard.name = artboard.name.replace(/\d{2,}/, n => {
       let nn = Number(n) + Number(value)
       return ('0' + nn).slice(-n.length)
     })
   })
+}
+
+function getInput(initial) {
+  initial = initial || 0
+  let buttons = ['Sequence', 'Cancel']
+  let info = 'Please enter increment / decrement value.'
+  let accessory = textField(initial)
+  let response = alert(info, buttons, accessory).runModal()
+  let result = accessory.stringValue()
+  if (response === 1000) {
+    switch (true) {
+      case !result.length() > 0:
+        // User clicked "OK" without entering a value.
+        // Return dialog until user enters anyting or clicks "Cancel".
+        return getInput()
+      case !Number(result):
+        throw alert('Please enter numbers only.').runModal()
+      default:
+        return result
+    }
+  }
 }

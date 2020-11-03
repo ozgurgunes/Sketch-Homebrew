@@ -1,6 +1,6 @@
 import sketch from 'sketch/dom'
-import * as UI from './ui.js'
-import analytics from './analytics.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import { successMessage } from '@ozgurgunes/sketch-plugin-ui'
 
 var doc = sketch.getSelectedDocument()
 
@@ -22,5 +22,5 @@ export default function() {
   let count = doc.selectedLayers.length
   let plural = count == 1 ? '' : 's'
   analytics('Artboards Selected', count)
-  return UI.message(`${count} layer${plural} artboards selected.`, 'success')
+  return successMessage(`${count} layer${plural} artboards selected.`)
 }

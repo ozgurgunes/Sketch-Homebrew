@@ -1,5 +1,5 @@
-import analytics from './analytics.js'
-import * as UI from './ui.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import { errorMessage, successMessage } from '@ozgurgunes/sketch-plugin-ui'
 
 export default function() {
   try {
@@ -12,10 +12,10 @@ export default function() {
     }
     pane.pluginManager().reloadPlugins()
     analytics('Done', 1)
-    UI.success('Plugins reloaded.')
+    successMessage('Plugins reloaded.')
   } catch (e) {
     console.log(e)
     analytics('Fail')
-    return UI.error('Something went wrong!')
+    return errorMessage('Something went wrong!')
   }
 }

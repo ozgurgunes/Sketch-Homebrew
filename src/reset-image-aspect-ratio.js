@@ -1,6 +1,6 @@
 import sketch from 'sketch/dom'
-import analytics from './analytics.js'
-import * as UI from './ui.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import { errorMessage, successMessage } from '@ozgurgunes/sketch-plugin-ui'
 
 export default function() {
   try {
@@ -11,7 +11,7 @@ export default function() {
     )
     if (images.length === 0) {
       analytics('Selection Error')
-      throw UI.error('Please select images!')
+      throw errorMessage('Please select images!')
     }
     images.map(layer => {
       layer.sketchObject.setConstrainProportions(0)
@@ -32,7 +32,7 @@ export default function() {
       layer.sketchObject.setConstrainProportions(1)
     })
     analytics('Done', images.length)
-    UI.success(images.length + ' images reset to aspect ratio.')
+    successMessage(images.length + ' images reset to aspect ratio.')
   } catch (e) {
     console.log(e)
     return e

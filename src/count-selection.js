@@ -1,6 +1,6 @@
 import sketch from 'sketch/dom'
-import * as UI from './ui.js'
-import analytics from './analytics.js'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import { errorMessage, successMessage } from '@ozgurgunes/sketch-plugin-ui'
 
 var doc = sketch.getSelectedDocument()
 
@@ -8,9 +8,9 @@ export default function() {
   let count = doc.selectedLayers.length
   if (count < 1) {
     analytics('No Selection')
-    throw UI.message("You don't have any selection.", 'error')
+    throw errorMessage("You don't have any selection.")
   }
   let plural = count == 1 ? '' : 's'
   analytics('Count', count)
-  return UI.message(`${count} layer${plural} selected.`, 'success')
+  return successMessage(`${count} layer${plural} selected.`, 'success')
 }

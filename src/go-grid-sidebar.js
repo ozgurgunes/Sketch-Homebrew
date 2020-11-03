@@ -1,5 +1,11 @@
-import analytics from './analytics'
-import * as UI from './ui'
+import analytics from '@ozgurgunes/sketch-plugin-analytics'
+import {
+  errorMessage,
+  successMessage,
+  alert,
+  textField
+} from '@ozgurgunes/sketch-plugin-ui'
+
 
 const sidebar = {
   hd: 256,
@@ -33,7 +39,7 @@ export default function(context) {
     let artboard = doc.currentPage().currentArtboard()
 
     if (artboard.frame().width() < 768) {
-      throw UI.dialog('Artboard is too small for a sidebar.')
+      throw alert('Artboard is too small for a sidebar.').runModal()
     }
 
     let columns = getInput()
@@ -71,13 +77,13 @@ export default function(context) {
 
       analytics(container + ' - ' + columns, 1)
       if (rounded) {
-        UI.error(
+        errorMessage(
           'Layout set to ' +
             columns +
             ' columns with sub-pixels. Numbers are rounded!'
         )
       } else {
-        UI.success(
+        successMessage(
           'Layout set to ' +
             columns +
             ' columns with ' +
@@ -131,8 +137,8 @@ function getInput(columns) {
   columns = columns || 12
   let buttons = ['Set Layout', 'Cancel']
   let info = 'How many columns do you want?'
-  let accessory = UI.textField(columns)
-  let response = UI.dialog(info, accessory, buttons)
+  let accessory = textField(columns)
+  let response = alert(info, buttons, accessory).runModal()
   let result = accessory.stringValue()
   if (response === 1000) {
     switch (true) {
@@ -141,7 +147,7 @@ function getInput(columns) {
         // Return dialog until user enters anyting or clicks "Cancel".
         return getInput()
       case !Number(result) || result > 24:
-        throw UI.dialog('Please enter a number 24 or less.')
+        throw alert('Please enter a number 24 or less.').runModal()
       default:
         return result
     }

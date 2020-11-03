@@ -6,16 +6,20 @@ import {
   textField
 } from '@ozgurgunes/sketch-plugin-ui'
 
-const containers = {
-  hd: 1784,
-  xLarge: 1360,
-  large: 1216,
-  medium: 936,
-  small: 744,
-  iPhonePlus: 382,
-  iPhone: 344,
-  xSmall: 328,
-  iPhone5: 288
+const toolbar = {
+  hd: 64,
+  xLarge: 64,
+  large: 64,
+  medium: 64,
+  small: 64
+}
+
+const margin = {
+  hd: 56,
+  xLarge: 56,
+  large: 48,
+  medium: 36,
+  small: 28
 }
 
 const gutters = {
@@ -23,11 +27,7 @@ const gutters = {
   xLarge: 32,
   large: 32,
   medium: 24,
-  small: 24,
-  iPhonePlus: 14,
-  iPhone: 16,
-  xSmall: 8,
-  iPhone5: 12
+  small: 24
 }
 
 var rounded = false
@@ -36,6 +36,11 @@ export default function(context) {
   try {
     let doc = context.document
     let artboard = doc.currentPage().currentArtboard()
+
+    if (artboard.frame().width() < 768) {
+      throw alert('Artboard is too small for a toolbar.').runModal()
+    }
+
     let columns = getInput()
 
     if (columns) {
@@ -56,26 +61,18 @@ export default function(context) {
           artboard.frame().width() < 1280:
           container = 'medium'
           break
-        case artboard.frame().width() >= 768 && artboard.frame().width() < 1024:
+        case artboard.frame().width() < 1024:
           container = 'small'
-          break
-        case artboard.frame().width() >= 414 && artboard.frame().width() < 768:
-          container = 'iPhonePlus'
-          break
-        case artboard.frame().width() >= 375 && artboard.frame().width() < 414:
-          container = 'iPhone'
-          break
-        case artboard.frame().width() >= 360 && artboard.frame().width() < 375:
-          container = 'xSmall'
-          break
-        case artboard.frame().width() < 360:
-          container = 'iPhone5'
           break
       }
 
       let layout = calculateLayout(artboard, container, columns)
       artboard.setLayout(layout)
       artboard.layout().setIsEnabled(true)
+
+      let ruler = artboard.horizontalRulerData()
+      showRuler(doc)
+      ruler.addGuideWithValue(toolbar[container])
 
       analytics(container + ' - ' + columns, 1)
       if (rounded) {
@@ -85,7 +82,13 @@ export default function(context) {
             ' columns with sub-pixels. Numbers are rounded!'
         )
       } else {
-        successMessage('Layout set to ' + columns + ' columns.')
+        successMessage(
+          'Layout set to ' +
+            columns +
+            ' columns with ' +
+            toolbar[container] +
+            'px toolbar.'
+        )
       }
     }
   } catch (e) {
@@ -105,13 +108,14 @@ function calculateLayout(artboard, container, columns) {
   layout.setNumberOfColumns(columns)
   layout.setGuttersOutside(false)
 
-  let totalWidth = containers[container]
+  let totalWidth =
+    artboard.frame().width() - toolbar[container] - margin[container] * 2
   let columnWidth = (totalWidth - (columns - 1) * gutters[container]) / columns
   if (columnWidth % 1 != 0) {
     rounded = true
   }
   columnWidth = Math.round(columnWidth)
-  let offset = Math.round((artboard.frame().width() - totalWidth) / 2)
+  let offset = toolbar[container] + margin[container]
 
   layout.setTotalWidth(totalWidth)
   layout.setGutterWidth(gutters[container])
@@ -145,6 +149,17 @@ function getInput(columns) {
         throw alert('Please enter a number 24 or less.').runModal()
       default:
         return result
+    }
+  }
+}
+
+function showRuler(document) {
+  if (!document.isRulersVisible()) {
+    let toggleRulersAction = document
+      .actionsController()
+      .actionForID('MSToggleRulersAction')
+    if (toggleRulersAction.validate()) {
+      toggleRulersAction.performAction(nil)
     }
   }
 }
