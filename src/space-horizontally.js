@@ -15,6 +15,7 @@ export default function () {
     return errorMessage('Please select at least 2 layers.')
   }
   let value = getInput()
+  if (value == null) return
   setSpacing(selection, value)
   analytics('Arranged', selection.length)
   successMessage(value + 'px')
@@ -29,12 +30,10 @@ function getInput(initial) {
   let result = accessory.stringValue()
   if (response === 1000) {
     switch (true) {
-      case !result.length() > 0:
+      case !Number.isInteger(Number(result)):
         // User clicked "OK" without entering a value.
         // Return dialog until user enters anyting or clicks "Cancel".
         return getInput()
-      case !Number(result):
-        throw alert('Please enter numbers only.').runModal()
       default:
         return result
     }

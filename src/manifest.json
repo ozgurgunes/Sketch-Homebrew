@@ -57,6 +57,12 @@
       "script": "./go-grid-default.js"
     },
     {
+      "name": "Go-Grid Container",
+      "identifier": "homebrew.go-grid-container",
+      "shortcut" : "cmd shift alt ctrl l",
+      "script": "./go-grid-container.js"
+    },
+    {
       "name": "Go-Grid Sidebar",
       "identifier": "homebrew.go-grid-sidebar",
       "shortcut" : "cmd shift ctrl l",
@@ -64,9 +70,9 @@
     },
     {
       "name": "Go-Grid Toolbar",
-      "identifier": "homebrew.go-grid-sidebar",
+      "identifier": "homebrew.go-grid-toolbar",
       "shortcut" : "cmd alt ctrl l",
-      "script": "./go-grid-sidebar.js"
+      "script": "./go-grid-toolbar.js"
     },
     {
       "name": "Toggle Pixel Fitting",
@@ -153,6 +159,7 @@
       "homebrew.pixel-fitting-toggle",
       "-",
       "homebrew.go-grid-default",
+      "homebrew.go-grid-container",
       "homebrew.go-grid-sidebar",
       "homebrew.go-grid-toolbar",
       "-",

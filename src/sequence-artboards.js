@@ -17,6 +17,7 @@ export default function () {
     return errorMessage('Please select artboards.')
   }
   let value = getInput()
+  if (!value) return
   increment(artboards, value)
   analytics('Artboards Sequenced', artboards.length)
   successMessage(artboards.length + ' artboards updated.')

@@ -7,6 +7,7 @@ var zoomValue = Math.round(100 * doc.sketchObject.zoomValue()) / 100
 
 export default function () {
   let value = getInput()
+  if (!value) return
   setZoom(value)
   analytics()
   showMessage(value + '%')

@@ -50,9 +50,8 @@ function detach(symbol) {
 }
 
 function generate(layer) {
-  if (layer.hidden == 'true') {
-    layer.remove()
-  }
+  if (layer.hidden) layer.remove()
+  if (layer.locked) layer.locked = false
   switch (layer.type) {
     case 'ShapePath' || 'Shape':
       layer.sharedStyleId = null

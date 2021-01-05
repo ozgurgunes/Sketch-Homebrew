@@ -3,44 +3,38 @@ import {
   errorMessage,
   successMessage,
   alert,
-  textField
+  textField,
 } from '@ozgurgunes/sketch-plugin-ui'
-
 
 var doc = context.document
 var selection = context.selection
 var handler = context.document.eventHandlerManager().normalHandler()
 var rect = handler.selectedRect()
 
-export default function() {
+export default function () {
   if (selection.count() == 0) {
     analytics('No Selection')
     throw errorMessage("You don't have any selection.")
   }
 
   let offset = getInput()
+  if (offset == null) return
 
   var slice = MSSliceLayer.alloc().init()
-
   slice.setFrame(MSRect.alloc().initWithRect(rect))
+  slice.frame().setX(rect.origin.x - offset)
+  slice.frame().setY(rect.origin.y - offset)
+  slice.frame().setWidth(rect.size.width + offset * 2)
+  slice.frame().setHeight(rect.size.height + offset * 2)
+  slice
+    .exportOptions()
+    .setExportFormats(MSExportPreset.allExportPresets()[0].exportFormats())
 
-  if (offset) {
-    slice.frame().setX(rect.origin.x - offset)
-    slice.frame().setY(rect.origin.y - offset)
-    slice.frame().setWidth(rect.size.width + offset * 2)
-    slice.frame().setHeight(rect.size.height + offset * 2)
+  doc.currentPage().addLayers([slice])
+  doc.currentPage().changeSelectionBySelectingLayers([slice])
 
-    slice
-      .exportOptions()
-      .setExportFormats(MSExportPreset.allExportPresets()[0].exportFormats())
-
-    doc.currentPage().addLayers([slice])
-
-    doc.currentPage().changeSelectionBySelectingLayers([slice])
-
-    analytics('Slice Created', 1)
-    return successMessage('Slice created')
-  }
+  analytics('Slice Created', 1)
+  return successMessage('Slice created')
 }
 
 function getInput() {
