@@ -12,5 +12,5 @@ export default function() {
   }
   let plural = count == 1 ? '' : 's'
   analytics('Count', count)
-  return successMessage(`${count} layer${plural} selected.`, 'success')
+  return successMessage(`${count} layer${plural} selected.`)
 }
